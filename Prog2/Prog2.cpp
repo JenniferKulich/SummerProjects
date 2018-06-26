@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() 
+int main()
 {
 	int board[10][10] = { 0 };
 	int randomXSpot = 0;
@@ -33,7 +33,7 @@ int main()
 		cout << endl << "Row must be between 1 and 10. Please enter another row: ";
 		cin >> guessX;
 		cout << endl;
-	}	
+	}
 	cout << endl << "Column: ";
 	cin >> guessY;
 	while (guessY < 1 || guessY > 10)
@@ -43,6 +43,28 @@ int main()
 		cout << endl;
 	}
 	cout << endl;
+
+	//change the row and column so compatable with array
+	guessX = guessX - 1;
+	guessY = guessY - 1;
+
+	//check to see if spot was a hit
+	if (board[guessX][guessY] != 0)
+	{
+		cout << "Ship was directly hit!" << endl;
+	}
+
+	//check to make sure it is not a close it- 1 cell away (meaning the ship is destoryed)
+	else if (board[guessX][guessY + 1] != 0 || board[guessX + 1][guessY + 1] != 0 ||
+		board[guessX + 1][guessY] != 0 || board[guessX + 1][guessY - 1] != 0 ||
+		board[guessX][guessY - 1] != 0 || board[guessX - 1][guessY - 1] != 0 ||
+		board[guessX - 1][guessY] || board[guessX - 1][guessY + 1])
+	{
+		cout << "Hit ship!" << endl;
+	}
+
+	//check to make sure it is not a near miss- 2 cells away (does no damage)
+
 
 
 	//check to make sure board spot changes
