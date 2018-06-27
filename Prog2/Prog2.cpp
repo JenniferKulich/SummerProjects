@@ -54,9 +54,6 @@ int main()
 	}
 
 	
-
-
-
 	//check to make sure board spot changes
 	/*int n;
 	for (i = 0; i < 10; i++)
@@ -209,7 +206,7 @@ void changeHitShip(int hitShip, int board[][10])
 	int i, n;
 	for (i = 0; i < 10; i++)
 	{
-		for (n = 0; n < 10; i++)
+		for (n = 0; n < 10; n++)
 		{
 			if (board[i][n] == hitShip)
 				board[i][n] = 0;
