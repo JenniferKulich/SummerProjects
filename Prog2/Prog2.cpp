@@ -48,19 +48,38 @@ int main()
 	guessX = guessX - 1;
 	guessY = guessY - 1;
 
+	int theShip = 0;
 	//check to see if spot was a hit
 	if (board[guessX][guessY] != 0)
 	{
-		cout << "Ship was directly hit!" << endl;
+		if (board[guessX][guessY] == 1)
+			cout << "Ship 1 was hit directly!" << endl;
+		else if (board[guessX][guessY] == 2)
+			cout << "Ship 2 was hit directly!" << endl;
+		else
+			cout << "Ship 3 was hit directly!" << endl;
 	}
 
 	//check to make sure it is not a close it- 1 cell away (meaning the ship is destoryed)
 	else if (board[guessX][guessY + 1] != 0 || board[guessX + 1][guessY + 1] != 0 ||
 		board[guessX + 1][guessY] != 0 || board[guessX + 1][guessY - 1] != 0 ||
 		board[guessX][guessY - 1] != 0 || board[guessX - 1][guessY - 1] != 0 ||
-		board[guessX - 1][guessY] || board[guessX - 1][guessY + 1])
+		board[guessX - 1][guessY] != 0 || board[guessX - 1][guessY + 1] != 0)
 	{
-		cout << "Hit ship!" << endl;
+		if (board[guessX][guessY + 1] != 1 || board[guessX + 1][guessY + 1] != 1 ||
+			board[guessX + 1][guessY] != 1 || board[guessX + 1][guessY - 1] != 1 ||
+			board[guessX][guessY - 1] != 1 || board[guessX - 1][guessY - 1] != 1 ||
+			board[guessX - 1][guessY] != 1 || board[guessX - 1][guessY + 1] != 1)
+			cout << "Hit ship 1!" << endl;
+
+		else if (board[guessX][guessY + 1] != 2 || board[guessX + 1][guessY + 1] != 2 ||
+			board[guessX + 1][guessY] != 2 || board[guessX + 1][guessY - 1] != 2 ||
+			board[guessX][guessY - 1] != 2 || board[guessX - 1][guessY - 1] != 2 ||
+			board[guessX - 1][guessY] != 2 || board[guessX - 1][guessY + 1] != 2)
+			cout << "Hit ship 2!" << endl;
+
+		else
+			cout << "Hit ship 3!" << endl;
 	}
 
 	//check to make sure it is not a near miss- 2 cells away (does no damage)
@@ -73,7 +92,29 @@ int main()
 		board[guessX - 2][guessY] != 0 || board[guessX - 2][guessY - 1] != 0 ||
 		board[guessX - 2][guessY - 2] != 0 || board[guessX - 1][guessY - 2] != 0)
 	{
-		cout << "Near Miss!" << endl;
+		if (board[guessX][guessY - 2] != 1 || board[guessX + 1][guessY - 2] != 1 ||
+			board[guessX + 2][guessY - 2] != 1 || board[guessX + 2][guessY - 1] != 1 ||
+			board[guessX + 2][guessY] != 1 || board[guessX + 2][guessY + 1] != 1 ||
+			board[guessX + 2][guessY + 2] != 1 || board[guessX + 1][guessY + 2] != 1 ||
+			board[guessX][guessY + 2] != 1 || board[guessX - 1][guessY + 2] != 1 ||
+			board[guessX - 2][guessY + 2] != 1 || board[guessX - 2][guessY + 1] != 1 ||
+			board[guessX - 2][guessY] != 1 || board[guessX - 2][guessY - 1] != 1 ||
+			board[guessX - 2][guessY - 2] != 1 || board[guessX - 1][guessY - 2] != 1)
+			cout << "Near miss ship 1!" << endl;
+
+		else if (board[guessX][guessY - 2] != 2 || board[guessX + 1][guessY - 2] != 2 ||
+			board[guessX + 2][guessY - 2] != 2 || board[guessX + 2][guessY - 1] != 2 ||
+			board[guessX + 2][guessY] != 2 || board[guessX + 2][guessY + 1] != 2 ||
+			board[guessX + 2][guessY + 2] != 2 || board[guessX + 1][guessY + 2] != 2 ||
+			board[guessX][guessY + 2] != 2 || board[guessX - 1][guessY + 2] != 2 ||
+			board[guessX - 2][guessY + 2] != 2 || board[guessX - 2][guessY + 1] != 2 ||
+			board[guessX - 2][guessY] != 2 || board[guessX - 2][guessY - 1] != 2 ||
+			board[guessX - 2][guessY - 2] != 2 || board[guessX - 1][guessY - 2] != 2)
+			cout << "Near miss ship 2!" << endl;
+
+		else
+			cout << "Near miss ship 3!" << endl;
+		
 	}
 
 
