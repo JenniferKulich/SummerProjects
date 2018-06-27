@@ -2,6 +2,12 @@
 
 using namespace std;
 
+void askUser(int &guessX, int &guessY);
+void directHit(int guessX, int guessY, int &numShipsHit, int board[][10]);
+void hitByOne(int guessX, int guessY, int &numShipsHit, int board[][10]);
+void missedByTwo(int guessX, int guessY, int board[][10]);
+void changeHitShip(int hitShip, int board[][10]);
+
 int main()
 {
 	int board[10][10] = { 0 };
@@ -24,6 +30,48 @@ int main()
 		board[randomXSpot - 1][randomYSpot - 1] = i;
 	}
 
+	int numShipsHit = 0;
+
+	while (numShipsHit < 3)
+	{
+		//call function to ask user for guess of spot
+		askUser(guessX, guessY);
+		
+		//change the row and column so compatable with array
+		guessX = guessX - 1;
+		guessY = guessY - 1;
+
+		//check if direct hit
+		directHit(guessX, guessY, numShipsHit, board);
+		
+		//check if ship hit by one space
+		hitByOne(guessX, guessY, numShipsHit, board);
+
+		//check if ship was missed by two spaces
+		missedByTwo(guessX, guessY, board);
+		
+		cout << endl;
+	}
+
+	
+
+
+
+	//check to make sure board spot changes
+	/*int n;
+	for (i = 0; i < 10; i++)
+	{
+		for (n = 0; n < 10; n++)
+			cout << board[i][n];
+		cout << endl;
+	}*/
+
+	return 0;
+}
+
+//function to ask user what their guess is on the ship
+void askUser(int &guessX, int &guessY)
+{
 	//ask user for a spot
 	cout << "Enter shot row and column (1-10)" << endl;
 	cout << "Row: ";
@@ -44,24 +92,43 @@ int main()
 	}
 	cout << endl;
 
-	//change the row and column so compatable with array
-	guessX = guessX - 1;
-	guessY = guessY - 1;
+	return;
+}
 
-	int theShip = 0;
+
+//function to check if the ship was directly hit
+void directHit(int guessX, int guessY, int &numShipsHit, int board[][10])
+{
 	//check to see if spot was a hit
 	if (board[guessX][guessY] != 0)
 	{
 		if (board[guessX][guessY] == 1)
+		{
 			cout << "Ship 1 was hit directly!" << endl;
+			changeHitShip(1, board);
+			numShipsHit = numShipsHit + 1;
+		}
 		else if (board[guessX][guessY] == 2)
+		{
 			cout << "Ship 2 was hit directly!" << endl;
+			changeHitShip(2, board);
+			numShipsHit = numShipsHit + 1;
+		}
 		else
+		{
 			cout << "Ship 3 was hit directly!" << endl;
-	}
+			changeHitShip(3, board);
+			numShipsHit = numShipsHit + 1;
+		}
 
-	//check to make sure it is not a close it- 1 cell away (meaning the ship is destoryed)
-	else if (board[guessX][guessY + 1] != 0 || board[guessX + 1][guessY + 1] != 0 ||
+	}
+	return;
+}
+
+//function to check if the ship was hit by one spot
+void hitByOne(int guessX, int guessY, int &numShipsHit, int board[][10])
+{
+	if (board[guessX][guessY + 1] != 0 || board[guessX + 1][guessY + 1] != 0 ||
 		board[guessX + 1][guessY] != 0 || board[guessX + 1][guessY - 1] != 0 ||
 		board[guessX][guessY - 1] != 0 || board[guessX - 1][guessY - 1] != 0 ||
 		board[guessX - 1][guessY] != 0 || board[guessX - 1][guessY + 1] != 0)
@@ -70,20 +137,36 @@ int main()
 			board[guessX + 1][guessY] != 1 || board[guessX + 1][guessY - 1] != 1 ||
 			board[guessX][guessY - 1] != 1 || board[guessX - 1][guessY - 1] != 1 ||
 			board[guessX - 1][guessY] != 1 || board[guessX - 1][guessY + 1] != 1)
+		{
+			numShipsHit = numShipsHit + 1;
 			cout << "Hit ship 1!" << endl;
+			changeHitShip(1, board);
+		}
 
 		else if (board[guessX][guessY + 1] != 2 || board[guessX + 1][guessY + 1] != 2 ||
 			board[guessX + 1][guessY] != 2 || board[guessX + 1][guessY - 1] != 2 ||
 			board[guessX][guessY - 1] != 2 || board[guessX - 1][guessY - 1] != 2 ||
 			board[guessX - 1][guessY] != 2 || board[guessX - 1][guessY + 1] != 2)
+		{
 			cout << "Hit ship 2!" << endl;
+			changeHitShip(2, board);
+			numShipsHit = numShipsHit + 1;
+		}
 
 		else
+		{
 			cout << "Hit ship 3!" << endl;
+			changeHitShip(3, board);
+			numShipsHit = numShipsHit + 1;
+		}
 	}
+	return;
+}
 
-	//check to make sure it is not a near miss- 2 cells away (does no damage)
-	else if (board[guessX][guessY - 2] != 0 || board[guessX + 1][guessY - 2] != 0 ||
+//function to check if ship was missed by two spots
+void missedByTwo(int guessX, int guessY, int board[][10])
+{
+	if (board[guessX][guessY - 2] != 0 || board[guessX + 1][guessY - 2] != 0 ||
 		board[guessX + 2][guessY - 2] != 0 || board[guessX + 2][guessY - 1] != 0 ||
 		board[guessX + 2][guessY] != 0 || board[guessX + 2][guessY + 1] != 0 ||
 		board[guessX + 2][guessY + 2] != 0 || board[guessX + 1][guessY + 2] != 0 ||
@@ -114,19 +197,24 @@ int main()
 
 		else
 			cout << "Near miss ship 3!" << endl;
-		
+
 	}
 
+	return;
+}
 
-
-	//check to make sure board spot changes
-	/*int n;
+//function to clear the board when a ship is hit
+void changeHitShip(int hitShip, int board[][10])
+{
+	int i, n;
 	for (i = 0; i < 10; i++)
 	{
-		for (n = 0; n < 10; n++)
-			cout << board[i][n];
-		cout << endl;
-	}*/
-
-	return 0;
+		for (n = 0; n < 10; i++)
+		{
+			if (board[i][n] == hitShip)
+				board[i][n] = 0;
+		}
+	}
+		
+	return;
 }
