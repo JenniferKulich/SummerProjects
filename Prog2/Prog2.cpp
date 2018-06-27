@@ -64,6 +64,17 @@ int main()
 	}
 
 	//check to make sure it is not a near miss- 2 cells away (does no damage)
+	else if (board[guessX][guessY - 2] != 0 || board[guessX + 1][guessY - 2] != 0 ||
+		board[guessX + 2][guessY - 2] != 0 || board[guessX + 2][guessY - 1] != 0 ||
+		board[guessX + 2][guessY] != 0 || board[guessX + 2][guessY + 1] != 0 ||
+		board[guessX + 2][guessY + 2] != 0 || board[guessX + 1][guessY + 2] != 0 ||
+		board[guessX][guessY + 2] != 0 || board[guessX - 1][guessY + 2] != 0 ||
+		board[guessX - 2][guessY + 2] != 0 || board[guessX - 2][guessY + 1] != 0 ||
+		board[guessX - 2][guessY] != 0 || board[guessX - 2][guessY - 1] != 0 ||
+		board[guessX - 2][guessY - 2] != 0 || board[guessX - 1][guessY - 2] != 0)
+	{
+		cout << "Near Miss!" << endl;
+	}
 
 
 
@@ -75,9 +86,6 @@ int main()
 			cout << board[i][n];
 		cout << endl;
 	}*/
-
-
-
 
 	return 0;
 }
