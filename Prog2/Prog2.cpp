@@ -3,14 +3,14 @@
 using namespace std;
 
 void askUser(int &guessX, int &guessY);
-bool directHit(int guessX, int guessY, int &numShipsHit, int board[][10]);
-bool hitByOne(int guessX, int guessY, int &numShipsHit, int board[][10]);
-void missedByTwo(int guessX, int guessY, int board[][10]);
-void changeHitShip(int hitShip, int board[][10]);
+bool directHit(int guessX, int guessY, int &numShipsHit, int board[][14]);
+bool hitByOne(int guessX, int guessY, int &numShipsHit, int board[][14]);
+void missedByTwo(int guessX, int guessY, int board[][14]);
+void changeHitShip(int hitShip, int board[][14]);
 
 int main()
 {
-	int board[10][10] = { 0 };
+	int board[14][14] = { 0 };
 	int randomXSpot = 0;
 	int randomYSpot = 0;
 	int guessX = 0;
@@ -27,7 +27,7 @@ int main()
 		cout << randomXSpot << endl << randomYSpot << endl;
 
 		//mark random spot of ship
-		board[randomXSpot - 1][randomYSpot - 1] = i;
+		board[randomXSpot + 1][randomYSpot + 1] = i;
 	}
 
 	int j, k;
@@ -37,9 +37,10 @@ int main()
 
 	while (numShipsHit < 3)
 	{
-		for (j = 0; j < 10; j++)
+		//check to make sure things were taken off of board
+		for (j = 0; j < 14; j++)
 		{
-			for (k = 0; k < 10; k++)
+			for (k = 0; k < 14; k++)
 				cout << board[j][k] << " ";
 			cout << endl;
 		}
@@ -95,12 +96,15 @@ void askUser(int &guessX, int &guessY)
 	}
 	cout << endl;
 
+	guessX = guessX + 2;
+	guessY = guessY + 2;
+
 	return;
 }
 
 
 //function to check if the ship was directly hit
-bool directHit(int guessX, int guessY, int &numShipsHit, int board[][10])
+bool directHit(int guessX, int guessY, int &numShipsHit, int board[][14])
 {
 	//check to see if spot was a hit
 	if (board[guessX][guessY] != 0)
@@ -132,7 +136,7 @@ bool directHit(int guessX, int guessY, int &numShipsHit, int board[][10])
 }
 
 //function to check if the ship was hit by one spot
-bool hitByOne(int guessX, int guessY, int &numShipsHit, int board[][10])
+bool hitByOne(int guessX, int guessY, int &numShipsHit, int board[][14])
 {
 	if (board[guessX][guessY + 1] != 0 || board[guessX + 1][guessY + 1] != 0 ||
 		board[guessX + 1][guessY] != 0 || board[guessX + 1][guessY - 1] != 0 ||
@@ -176,7 +180,7 @@ bool hitByOne(int guessX, int guessY, int &numShipsHit, int board[][10])
 }
 
 //function to check if ship was missed by two spots
-void missedByTwo(int guessX, int guessY, int board[][10])
+void missedByTwo(int guessX, int guessY, int board[][14])
 {
 	if (board[guessX][guessY - 2] != 0 || board[guessX + 1][guessY - 2] != 0 ||
 		board[guessX + 2][guessY - 2] != 0 || board[guessX + 2][guessY - 1] != 0 ||
@@ -223,12 +227,12 @@ void missedByTwo(int guessX, int guessY, int board[][10])
 }
 
 //function to clear the board when a ship is hit
-void changeHitShip(int hitShip, int board[][10])
+void changeHitShip(int hitShip, int board[][14])
 {
 	int i, n;
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < 14; i++)
 	{
-		for (n = 0; n < 10; n++)
+		for (n = 0; n < 14; n++)
 		{
 			if (board[i][n] == hitShip)
 			{
