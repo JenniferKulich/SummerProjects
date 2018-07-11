@@ -39,7 +39,24 @@ int main()
 	if (answerContinue == 4)
 		return 0;
 	
-		
+	//set up board with chutes and ladders
+
+	//add the ladders
+	board[1][3] = 1;
+	board[0][4] = 1;
+	board[3][3] = 2;
+	board[0][6] = 2;
+	board[4][4] = 3;
+	board[2][3] = 3;
+
+	//add the chutes
+	board[0][3] = 5;
+	board[2][1] = 5;
+	board[1][4] = 6;
+	board[3][6] = 6;
+	board[3][2] = 7;
+	board[4][3] = 7;
+
 
 
 
@@ -48,6 +65,8 @@ int main()
 	return 0;
 }
 
+
+//function that will ask user if they would like to roll or quit
 int rollOrQuit()
 {
 	char choice;
