@@ -1,12 +1,19 @@
 //START OF ARRAY IS THE FINISH LINE
 #include <iostream>
 #include <time.h>
+#include <stdlib.h>
 
 using namespace std;
 
 int rollOrQuit();
 void setUpBoard(char board[]);
 void printBoard(char board[]);
+void findPlayer(char board[], int &playerSpot, char playerName);
+void rollDice(int &diceRoll);
+int canPlayerMove(char board[], int playerSpot, int diceRoll);
+int moveForChuteOrLadder(char board[], int playerSpot, int diceRoll);
+void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int moveType);
+bool didWin(int playerSpot);
 
 int main()
 {
@@ -14,9 +21,13 @@ int main()
 	int numPlayers = 0;
 	char playerOne = 'a';
 	char playerTwo = 'b';
+	char playerThree = 'c';
+	char playerFour = 'd';
 	int answerContinue = 0;
 	int spotPlayerOne = 0;
 	int spotPlayerTwo = 0;
+	int spotPlayerThree = 0;
+	int spotPlayerFour = 0;
 
 
 	//initialize the board as all blanks
@@ -45,18 +56,7 @@ int main()
 	}
 
 	
-	//if three players
-	if (numPlayers == 3)
-	{
-		char playerThree = 'c';
-		int spotPlayerThree = 0;
-	}
-	//if four players
-	if (numPlayers == 4)
-	{
-		char playerFour = 'd';
-		int spotPlayerFour = 0;
-	}
+	
 	
 
 	//ask the user if they would like to roll or quit
@@ -70,6 +70,48 @@ int main()
 	//if quit was picked, quit the program
 	if (answerContinue == 4)
 		return 0;
+
+	int playerOn = 1;
+	int diceRoll = 0;
+	int typeMove = 0;
+	int moveType = 0;
+	char playerName;
+	//this is to get all of the players started
+	while (playerOn <= numPlayers)
+	{
+		if (playerOn == 1)
+			playerName = playerOne;
+		if (playerOn == 2)
+			playerName = playerTwo;
+		if (playerOn == 3)
+			playerName = playerThree;
+		if (playerOn == 4)
+			playerName = playerFour;
+
+		rollDice(diceRoll);
+		typeMove = canPlayerMove(board, 41, diceRoll);
+		if (typeMove == 1)
+		{
+			//can move to open space
+			playerMove(board, 41, playerName, diceRoll, 9);
+		}
+		if (typeMove == 2)
+		{
+			//there is a chute or ladder
+			moveType = moveForChuteOrLadder(board, 41, diceRoll);
+			playerMove(board, 41, playerName, diceRoll, moveType);
+		}
+		if (typeMove == 3)
+		{
+			cout << "Player cannot move :( " << endl << "Turn will be skipped";
+			cout << endl;
+		}
+
+		playerOn++;
+
+	}
+
+
 
 	//find player
 	//roll the dice
@@ -151,6 +193,7 @@ void findPlayer(char board[], int &playerSpot, char playerName)
 	}
 }
 
+
 //function that will roll the dice
 void rollDice(int &diceRoll)
 {
@@ -165,15 +208,15 @@ void rollDice(int &diceRoll)
 int canPlayerMove(char board[], int playerSpot, int diceRoll)
 {
 	//check if the spot is open or occupied by another player
-	if (board[playerSpot - diceRoll] == (char)"_")
+	if (board[playerSpot - diceRoll] == 95 /*_*/)
 		return 1;
 	//check if the spot is a chute or ladder
-	if (board[playerSpot - diceRoll] == (char)"1" ||
-		board[playerSpot - diceRoll] == (char)"2" ||
-		board[playerSpot - diceRoll] == (char)"3" ||
-		board[playerSpot - diceRoll] == (char)"5" ||
-		board[playerSpot - diceRoll] == (char)"6" ||
-		board[playerSpot - diceRoll] == (char)"7" )
+	if (board[playerSpot - diceRoll] == 49 /*1*/ ||
+		board[playerSpot - diceRoll] == 50 /*2*/ ||
+		board[playerSpot - diceRoll] == 51 /*3*/ ||
+		board[playerSpot - diceRoll] == 53 /*5*/ ||
+		board[playerSpot - diceRoll] == 54 /*6*/ ||
+		board[playerSpot - diceRoll] == 55 /*7*/ )
 		return 2;
 	else
 		return 3;
@@ -188,7 +231,7 @@ int moveForChuteOrLadder(char board[], int playerSpot, int diceRoll)
 
 	//if 1, 2, 3 then it's a ladder
 	//check if landing on lower part of ladder
-	if(board[playerSpot - diceRoll] == (char)"1")
+	if(board[playerSpot - diceRoll] == 49 /*1*/)
 	{
 		if (playerSpot - diceRoll == 11)
 			return 1;
@@ -197,7 +240,7 @@ int moveForChuteOrLadder(char board[], int playerSpot, int diceRoll)
 	}
 		
 
-	if (board[playerSpot - diceRoll] == (char)"2")
+	if (board[playerSpot - diceRoll] == 50 /*2*/)
 	{
 		if (playerSpot - diceRoll == 27)
 			return 2;
@@ -205,17 +248,17 @@ int moveForChuteOrLadder(char board[], int playerSpot, int diceRoll)
 			return 10;
 	}
 
-	if (board[playerSpot - diceRoll] == (char)"3")
+	if (board[playerSpot - diceRoll] == 51 /*3*/)
 	{
 		if(playerSpot - diceRoll == 36)
 			return 3;
 		else
 			return 10;
 	}
-		
+
 
 	//if 5, 6, 7 then it's a chute
-	if (board[playerSpot - diceRoll] == (char)"5")
+	if (board[playerSpot - diceRoll] == 53 /*5*/)
 	{
 		if (playerSpot - diceRoll == 3)
 			return 5;
@@ -223,7 +266,7 @@ int moveForChuteOrLadder(char board[], int playerSpot, int diceRoll)
 			return 10;
 	}
 
-	if (board[playerSpot - diceRoll] == (char)"6")
+	if (board[playerSpot - diceRoll] == 54 /*6*/)
 	{
 		if (playerSpot - diceRoll == 12)
 			return 6;
@@ -231,7 +274,7 @@ int moveForChuteOrLadder(char board[], int playerSpot, int diceRoll)
 			return 10;
 	}
 
-	if (board[playerSpot - diceRoll] == (char)"7")
+	if (board[playerSpot - diceRoll] == 55 /*7*/)
 	{
 		if (playerSpot - diceRoll == 26)
 			return 7;
@@ -239,23 +282,7 @@ int moveForChuteOrLadder(char board[], int playerSpot, int diceRoll)
 			return 10;
 	}
 
-
-
-	////add the ladders
-	//board[4] = '1';
-	//board[11] = '1';
-	//board[27] = '2';
-	//board[6] = '2';
-	//board[36] = '3';
-	//board[19] = '3';
-
-	////add the chutes
-	//board[3] = '5';
-	//board[17] = '5';
-	//board[12] = '6';
-	//board[30] = '6';
-	//board[26] = '7';
-	//board[35] = '7';
+	return 0;
 }
 
 
@@ -265,7 +292,7 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 	//for ladder number one
 	if (moveType == 1)
 	{
-		board[playerSpot] = (char)"_";
+		board[playerSpot] = 95 /*_*/;
 		board[5] = playerName;
 	}
 
@@ -273,7 +300,7 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 	//for ladder number two
 	if (moveType == 2)
 	{
-		board[playerSpot] = (char) "_";
+		board[playerSpot] = 95 /*_*/;
 		board[7] = playerName;
 	}
 
@@ -281,7 +308,7 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 	//for ladder number three
 	if (moveType == 3)
 	{
-		board[playerSpot] = (char)"_";
+		board[playerSpot] = 95 /*_*/;
 		board[20] = playerName;
 	}
 
@@ -289,7 +316,7 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 	//for chute number 5
 	if (moveType == 5)
 	{
-		board[playerSpot] = (char)"_";
+		board[playerSpot] = 95 /*_*/;
 		board[18] = playerName;
 	}
 
@@ -297,7 +324,7 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 	//for chute number 6
 	if (moveType == 6)
 	{
-		board[playerSpot] = (char)"_";
+		board[playerSpot] = 95 /*_*/;
 		board[31] = playerName;
 	}
 
@@ -305,7 +332,7 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 	//for chute number 7
 	if (moveType == 7)
 	{
-		board[playerSpot] = (char)"_";
+		board[playerSpot] = 95 /*_*/;
 		board[36] = playerName;
 	}
 
@@ -315,7 +342,7 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 	where they were with an underscore */
 	if (moveType == 9)
 	{
-		board[playerSpot] = (char)"_";
+		board[playerSpot] = 95 /*_*/;
 		board[playerSpot - diceRoll] = playerName;
 	}
 	
