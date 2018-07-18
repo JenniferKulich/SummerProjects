@@ -19,10 +19,10 @@ int main()
 {
 	char board[40];
 	int numPlayers = 0;
-	char playerOne = 'a';
-	char playerTwo = 'b';
-	char playerThree = 'c';
-	char playerFour = 'd';
+	char playerOne = 97 /*a*/;
+	char playerTwo = 98 /*b*/;
+	char playerThree = 99 /*c*/;
+	char playerFour = 100 /*d*/;
 	int answerContinue = 0;
 	int spotPlayerOne = 0;
 	int spotPlayerTwo = 0;
@@ -56,9 +56,6 @@ int main()
 	}
 
 	
-	
-	
-
 	//ask the user if they would like to roll or quit
 	answerContinue = rollOrQuit();
 	//if neither roll or quit were selected, ask again until it is
@@ -89,27 +86,29 @@ int main()
 			playerName = playerFour;
 
 		rollDice(diceRoll);
-		typeMove = canPlayerMove(board, 41, diceRoll);
+		typeMove = canPlayerMove(board, 39, diceRoll);
 		if (typeMove == 1)
 		{
 			//can move to open space
-			playerMove(board, 41, playerName, diceRoll, 9);
+			playerMove(board, 39, playerName, diceRoll, 9);
 		}
 		if (typeMove == 2)
 		{
 			//there is a chute or ladder
-			moveType = moveForChuteOrLadder(board, 41, diceRoll);
-			playerMove(board, 41, playerName, diceRoll, moveType);
+			moveType = moveForChuteOrLadder(board, 39, diceRoll);
+			playerMove(board, 39, playerName, diceRoll, moveType);
 		}
 		if (typeMove == 3)
 		{
-			cout << "Player cannot move :( " << endl << "Turn will be skipped";
-			cout << endl;
+			cout << "Player " << playerName << " cannot move :( " <<
+				endl << "Turn will be skipped" << endl;
 		}
 
 		playerOn++;
 
 	}
+
+	printBoard(board);
 
 
 
@@ -153,12 +152,12 @@ void setUpBoard(char board[])
 	board[19] = '3';
 	
 	//add the chutes
-	board[3] = '5';
+	board[2] = '5';
 	board[17] = '5';
-	board[12] = '6';
+	board[13] = '6';
 	board[30] = '6';
-	board[26] = '7';
-	board[35] = '7';
+	board[25] = '7';
+	board[34] = '7';
 
 	return;
 }
