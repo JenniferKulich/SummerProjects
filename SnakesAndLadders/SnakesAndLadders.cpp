@@ -17,7 +17,7 @@ bool didWin(int playerSpot);
 
 int main()
 {
-	char board[40];
+	char board[41];
 	int numPlayers = 0;
 	char playerOne = 97 /*a*/;
 	char playerTwo = 98 /*b*/;
@@ -76,6 +76,7 @@ int main()
 	//this is to get all of the players started
 	while (playerOn <= numPlayers)
 	{
+		//check which player it's on
 		if (playerOn == 1)
 			playerName = playerOne;
 		if (playerOn == 2)
@@ -85,8 +86,97 @@ int main()
 		if (playerOn == 4)
 			playerName = playerFour;
 
+		//roll the dice
 		rollDice(diceRoll);
-		typeMove = canPlayerMove(board, 39, diceRoll);
+
+
+		cout << playerName << " " << diceRoll << endl;
+
+		//see what move can be made
+		typeMove = canPlayerMove(board, 40, diceRoll);
+
+		//make a move based on what can be done
+		if (typeMove == 1)
+		{
+			//can move to open space
+			playerMove(board, 40, playerName, diceRoll, 9);
+		}
+		if (typeMove == 2)
+		{
+			//there is a chute or ladder
+			moveType = moveForChuteOrLadder(board, 40, diceRoll);
+			playerMove(board, 40, playerName, diceRoll, moveType);
+		}
+		if (typeMove == 3)
+		{
+			cout << "Player " << playerName << " cannot move :( " <<
+				endl << "Turn will be skipped" << endl;
+		}
+
+		printBoard(board);
+		cout << endl;
+
+		//ask the user if they would like to roll or quit
+		answerContinue = rollOrQuit();
+		//if neither roll or quit were selected, ask again until it is
+		while (answerContinue == 5)
+		{
+			cout << "Invalid choice. Please enter R for roll or Q for quit" << endl;
+			answerContinue = rollOrQuit();
+		}
+		//if quit was picked, quit the program
+		if (answerContinue == 4)
+			return 0;
+
+		playerOn++;
+	}
+
+
+
+	//ask the user if they would like to roll or quit
+	answerContinue = rollOrQuit();
+	//if neither roll or quit were selected, ask again until it is
+	while (answerContinue == 5)
+	{
+		cout << "Invalid choice. Please enter R for roll or Q for quit" << endl;
+		answerContinue = rollOrQuit();
+	}
+	//if quit was picked, quit the program
+	if (answerContinue == 4)
+		return 0;
+
+
+
+	int playerSpot = 0;
+	playerName = playerOne;
+	playerOn = 1;
+	do
+	{
+		playerSpot = 0;
+		//check which player's turn it is
+		if (playerOn == 1)
+			playerName = playerOne;
+		if (playerOn == 2)
+			playerName = playerTwo;
+		if (playerOn == 3)
+			playerName = playerThree;
+		if (playerOn == 4)
+			playerName = playerFour;
+
+		//find the player on the board
+		findPlayer(board, playerSpot, playerName);
+
+		//roll the dice
+		rollDice(diceRoll);
+
+
+		cout << playerName << " " << diceRoll << endl;
+
+
+		//see if the player can move
+		typeMove = canPlayerMove(board, playerSpot, diceRoll);
+
+		//make a move based on what can be done
 		if (typeMove == 1)
 		{
 			//can move to open space
@@ -104,11 +194,42 @@ int main()
 				endl << "Turn will be skipped" << endl;
 		}
 
-		playerOn++;
+		printBoard(board);
+		cout << endl;
 
-	}
+		bool playerWon;
+		//check if the player did win
+		playerWon = didWin(playerSpot);
+		if (playerWon == true)
+		{
+			cout << "Player " << playerOn << " won!";
+			return 0;
+		}
 
-	printBoard(board);
+
+		//ask the user if they would like to roll or quit
+		answerContinue = rollOrQuit();
+		//if neither roll or quit were selected, ask again until it is
+		while (answerContinue == 5)
+		{
+			cout << "Invalid choice. Please enter R for roll or Q for quit" << endl;
+			answerContinue = rollOrQuit();
+		}
+		//if quit was picked, quit the program
+		if (answerContinue == 4)
+			return 0;
+
+
+		//update the player. If the playerOne is equal to the num of players,
+		//restart the player number at one
+		if (playerOn == numPlayers)
+			playerOn = 1;
+		else
+			playerOn++;
+
+		
+	} while (didWin(playerSpot) == false);
+	
 
 
 
@@ -190,13 +311,15 @@ void findPlayer(char board[], int &playerSpot, char playerName)
 		if (board[i] == playerName)
 			playerSpot = i;
 	}
+	if(playerSpot == 0)
+		playerSpot = 40;
 }
 
 
 //function that will roll the dice
 void rollDice(int &diceRoll)
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 
 	//get random number between 1 and 6
 	diceRoll = rand() % 6 + 1;
@@ -343,6 +466,12 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 	{
 		board[playerSpot] = 95 /*_*/;
 		board[playerSpot - diceRoll] = playerName;
+	}
+
+	if (moveType == 10)
+	{
+		cout << "Player " << playerName << " cannot move :( " <<
+			endl << "Turn will be skipped" << endl;
 	}
 	
 	return;
