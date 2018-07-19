@@ -15,6 +15,7 @@ int moveForChuteOrLadder(char board[], int playerSpot, int diceRoll);
 void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int moveType);
 bool didWin(int playerSpot);
 
+
 int main()
 {
 	char board[41];
