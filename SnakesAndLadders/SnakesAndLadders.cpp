@@ -481,7 +481,7 @@ void playerMove(char board[], int playerSpot, char playerName, int diceRoll, int
 //function that will check to see if player has won
 bool didWin(int playerSpot)
 {
-	if (playerSpot == 0)
+	if (playerSpot == 1)
 		return true;
 	else
 		return false;
