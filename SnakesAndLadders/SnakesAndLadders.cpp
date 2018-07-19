@@ -180,13 +180,13 @@ int main()
 		if (typeMove == 1)
 		{
 			//can move to open space
-			playerMove(board, 39, playerName, diceRoll, 9);
+			playerMove(board, playerSpot, playerName, diceRoll, 9);
 		}
 		if (typeMove == 2)
 		{
 			//there is a chute or ladder
-			moveType = moveForChuteOrLadder(board, 39, diceRoll);
-			playerMove(board, 39, playerName, diceRoll, moveType);
+			moveType = moveForChuteOrLadder(board, playerSpot, diceRoll);
+			playerMove(board, playerSpot, playerName, diceRoll, moveType);
 		}
 		if (typeMove == 3)
 		{
