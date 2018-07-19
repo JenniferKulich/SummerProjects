@@ -132,21 +132,6 @@ int main()
 	}
 
 
-
-	//ask the user if they would like to roll or quit
-	answerContinue = rollOrQuit();
-	//if neither roll or quit were selected, ask again until it is
-	while (answerContinue == 5)
-	{
-		cout << "Invalid choice. Please enter R for roll or Q for quit" << endl;
-		answerContinue = rollOrQuit();
-	}
-	//if quit was picked, quit the program
-	if (answerContinue == 4)
-		return 0;
-
-
-
 	int playerSpot = 0;
 	playerName = playerOne;
 	playerOn = 1;
@@ -279,12 +264,19 @@ void printBoard(char board[])
 {
 	int i = 0;
 	
-	for (i = 0; i < 40; i++)
+	cout << "FINISH --> " << board[0] << " " << board[1] << " "
+		<< board[2] << " " << board[3] << " " << board[4] << " "
+		<< board[5] << " " << board[6] << " " << board[7];
+	for (i = 8; i < 40; i++)
 	{
 		if (i % 8 == 0)
+		{
 			cout << endl;
+			cout << "           ";
+		}	
 		cout << board[i] << " ";
 	}
+	cout << "<-- START" << endl;
 	return;
 }
 
