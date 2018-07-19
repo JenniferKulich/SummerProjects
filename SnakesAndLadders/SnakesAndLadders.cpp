@@ -232,16 +232,6 @@ int main()
 	
 
 
-
-	//find player
-	//roll the dice
-	//check if player can move
-	//check if chute or ladder
-	//act on if chute or ladder
-	//move player
-	//check if at end of board
-
-
 	return 0;
 }
 
@@ -319,7 +309,7 @@ void findPlayer(char board[], int &playerSpot, char playerName)
 //function that will roll the dice
 void rollDice(int &diceRoll)
 {
-	//srand(time(NULL));
+	srand(time(NULL));
 
 	//get random number between 1 and 6
 	diceRoll = rand() % 6 + 1;
