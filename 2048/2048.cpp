@@ -11,6 +11,7 @@ int main()
 	int board[4][4];
 	int i, n;
 	int userMove = 0;
+	bool isWin = false;
 
 	//set the whole board to zero
 	for (i = 0; i < 4; i++)
@@ -69,6 +70,9 @@ int main()
 	printBoard(board);
 	moveAllRight(board);
 	cout << endl;
+	printBoard(board);
+	cout << endl;
+	combineRight(board, isWin);
 	printBoard(board);
 
 
@@ -232,6 +236,55 @@ void combineRight(int board[][4], bool &isWin)
 
 	//move everything to the right
 	moveAllRight(board);
+
+	//put things together
+	//start on the left side and work over
+	//will only do anything if the right most and second right most column has number
+	for (i = 0; i < 4; i++)
+	{
+		if (board[i][3] != 0 && board[i][2] != 0)
+		{
+			numInSpot = board[i][3];
+			//if the next one is combineable, combine them and move everything over
+			if (board[i][2] == numInSpot)
+			{
+				board[i][2] = 0;
+				board[i][3] = numInSpot * numInSpot;
+				moveAllRight(board);
+			}
+
+			//check if there's a number in third right most spot
+			//if there is a number, see if can combine
+			if (board[i][1] != 0)
+			{
+				numInSpot = board[0][1];
+				if (board[i][2] == numInSpot)
+				{
+					board[i][1] = 0;
+					board[i][2] = numInSpot * numInSpot;
+					moveAllRight(board);
+				}
+
+				//check if there's anumber in the fourth right most spot
+				//if there is a number, see if can combine
+				if (board[i][0] != 0)
+				{
+					numInSpot = board[i][0];
+					if (board[i][1] == numInSpot)
+					{
+						board[i][0] = 0;
+						board[i][1] = numInSpot * numInSpot;
+						moveAllRight(board);
+					}
+				}
+
+			}
+		}
+	}
+	
+	
+	
+
 
 
 
