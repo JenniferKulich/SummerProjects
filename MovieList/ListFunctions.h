@@ -3,7 +3,7 @@
 class MenuOptions
 {
 public:
-	void addItem();
+	void addItem(node *&headptr,  string Name);
 	void removeItem();
 	void clearList();
 
@@ -14,6 +14,6 @@ private:
 
 struct node
 {
-	int moveList;
+	string movieName;
 	struct node *next;
 };
