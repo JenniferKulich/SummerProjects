@@ -59,13 +59,14 @@ int main()
 
 	//test to see if everything is moved
 	//add random things to the board
-	board[0][0] = 3;
+	board[0][0] = 4;
 	board[0][2] = 4;
 	board[1][3] = 5;
 	board[1][2] = 6;
-	board[1][0] = 7;
+	board[1][0] = 5;
 	board[2][2] = 8;
-	board[3][0] = 9;
+	board[3][0] = 2;
+	board[3][1] = 2;
 	//board[3][1] = 5;
 	printBoard(board);
 	moveAllRight(board);
@@ -249,7 +250,7 @@ void combineRight(int board[][4], bool &isWin)
 			if (board[i][2] == numInSpot)
 			{
 				board[i][2] = 0;
-				board[i][3] = numInSpot * numInSpot;
+				board[i][3] = numInSpot * 2;
 				moveAllRight(board);
 			}
 
@@ -257,11 +258,11 @@ void combineRight(int board[][4], bool &isWin)
 			//if there is a number, see if can combine
 			if (board[i][1] != 0)
 			{
-				numInSpot = board[0][1];
+				numInSpot = board[i][1];
 				if (board[i][2] == numInSpot)
 				{
 					board[i][1] = 0;
-					board[i][2] = numInSpot * numInSpot;
+					board[i][2] = numInSpot * 2;
 					moveAllRight(board);
 				}
 
@@ -273,7 +274,7 @@ void combineRight(int board[][4], bool &isWin)
 					if (board[i][1] == numInSpot)
 					{
 						board[i][0] = 0;
-						board[i][1] = numInSpot * numInSpot;
+						board[i][1] = numInSpot * 2;
 						moveAllRight(board);
 					}
 				}
