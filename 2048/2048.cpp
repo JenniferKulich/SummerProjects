@@ -1,9 +1,12 @@
 #include <iostream>
+#include <time.h>
+#include <stdlib.h>
 
 using namespace std;
 
 void printBoard(int board[][4]);
 bool isBoardFull(int board[][4]);
+void placeNewRandom(int board[][4]);
 void moveAllRight(int board[][4]);
 void combineRight(int board[][4], bool &isWin);
 void moveAllLeft(int board[][4]);
@@ -71,15 +74,18 @@ int main()
 	//add random things to the board
 	board[0][0] = 4;
 	board[0][2] = 4;
+	board[0][3] = 5;
 	board[1][3] = 5;
 	board[1][2] = 6;
 	board[1][0] = 5;
 	board[2][2] = 8;
+	board[2][1] = 2;
 	board[3][0] = 2;
-	board[3][1] = 2;
+	board[3][1] = 5;
+	board[3][3] = 10;
 	//board[3][1] = 5;
 	printBoard(board);
-	moveAllRight(board);
+	/*moveAllRight(board);
 	cout << endl;
 	printBoard(board);
 	cout << endl;
@@ -90,7 +96,7 @@ int main()
 	printBoard(board);
 	cout << endl;
 	combineLeft(board, isWin);
-	printBoard(board);
+	printBoard(board);*/
 	cout << endl;
 	moveAllUp(board);
 	printBoard(board);
@@ -111,6 +117,10 @@ int main()
 		cout << "Sorry! The board is full and a move cannot be made" << endl;
 		return 0;
 	}
+
+	//put a new random number on the board
+	placeNewRandom(board);
+	printBoard(board);
 
 
 	return 0;
@@ -153,6 +163,37 @@ bool isBoardFull(int board[][4])
 	}
 
 	return true;
+}
+
+
+//function that will place a new number on the board on a random location
+void placeNewRandom(int board[][4])
+{
+	int newNum;
+	int randomRow;
+	int randomColumn;
+
+	srand(time(NULL));
+
+	//get random number either 2 or 4
+	newNum = 2 * (rand() % 2 + 1);
+
+	//get random number for row and column to place number
+	randomRow = rand() % 3;
+	randomColumn = rand() % 3;
+
+	//if cannot place number on board, get new place to put number
+	while (board[randomRow][randomColumn] != 0)
+	{
+		randomRow = rand() % 3;
+		randomColumn = rand() % 3;
+	}
+	
+	//set the board to the new random number
+	board[randomRow][randomColumn] = newNum;
+	
+
+	return;
 }
 
 
