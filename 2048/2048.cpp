@@ -95,6 +95,9 @@ int main()
 	moveAllUp(board);
 	printBoard(board);
 	cout << endl;
+	moveAllDown(board);
+	printBoard(board);
+	cout << endl;
 
 	fullBoard = isBoardFull(board);
 	if (fullBoard == true)
@@ -676,10 +679,126 @@ void combineUp(int board[][4], bool &isWin)
 //function that will move everything down
 void moveAllDown(int board[][4])
 {
+	int i;
+	int numThere = 0;
+
+	for (i = 0; i < 4; i++)
+	{
+		//check if the bottom row is open
+		if (board[3][i] == 0)
+		{
+			if (board[2][i] != 0)
+			{
+				numThere = board[2][i];
+				board[2][i] = 0;
+				board[3][i] = numThere;
+			}
+			else if (board[2][i] == 0)
+			{
+				if (board[1][i] != 0)
+				{
+					numThere = board[1][i];
+					board[1][i] = 0;
+					board[2][i] = numThere;
+					if (board[3][i] == 0)
+					{
+						numThere = board[2][i];
+						board[2][i] = 0;
+						board[3][i] = numThere;
+					}
+				}
+				else if (board[1][i] == 0)
+				{
+					if (board[0][i] != 0)
+					{
+						numThere = board[0][i];
+						board[0][i] = 0;
+						board[1][i] = numThere;
+						if (board[2][i] == 0)
+						{
+							numThere = board[1][i];
+							board[1][i] = 0;
+							board[2][i] = numThere;
+							if (board[3][i] == 0)
+							{
+								numThere = board[2][i];
+								board[2][i] = 0;
+								board[3][i] = numThere;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		//check if row 2 is open
+		if (board[2][i] == 0)
+		{
+			if (board[1][i] != 0)
+			{
+				numThere = board[1][i];
+				board[1][i] = 0;
+				board[2][i] = numThere;
+				if (board[3][i] == 0)
+				{
+					numThere = board[2][i];
+					board[2][i] = 0;
+					board[3][i] = numThere;
+				}
+			}
+			else if (board[1][i] == 0)
+			{
+				if (board[0][i] != 0)
+				{
+					numThere = board[0][i];
+					board[0][i] = 0;
+					board[1][i] = numThere;
+					if (board[2][i] == 0)
+					{
+						numThere = board[1][i];
+						board[1][i] = 0;
+						board[2][i] = numThere;
+						if (board[3][i] == 0)
+						{
+							numThere = board[2][i];
+							board[2][i] = 0;
+							board[3][i] = numThere;
+						}
+					}
+				}
+			}
+		}
+
+		//check if row 1 is open
+		if (board[1][i] == 0)
+		{
+			if (board[0][i] != 0)
+			{
+				numThere = board[0][i];
+				board[0][i] = 0;
+				board[1][i] = numThere;
+				if (board[2][i] == 0)
+				{
+					numThere = board[1][i];
+					board[1][i] = 0;
+					board[2][i] = numThere;
+					if (board[3][i] == 0)
+					{
+						numThere = board[2][i];
+						board[2][i] = 0;
+						board[3][i] = numThere;
+					}
+				}
+			}
+		}
+	}
 
 	return;
 }
 
 
 //function that will handle the movement down
-void combineDown(int board[][4], bool &isWin);
+void combineDown(int board[][4], bool &isWin)
+{
+	return;
+}
