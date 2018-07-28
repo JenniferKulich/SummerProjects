@@ -3,8 +3,10 @@
 using namespace std;
 
 void printBoard(int board[][4]);
-void combineRight(int board[][4], bool &isWin);
 void moveAllRight(int board[][4]);
+void combineRight(int board[][4], bool &isWin);
+void moveAllLeft(int board[][4]);
+void combineLeft(int board[][4], bool &isWin);
 
 int main()
 {
@@ -75,6 +77,13 @@ int main()
 	cout << endl;
 	combineRight(board, isWin);
 	printBoard(board);
+	cout << endl;
+	moveAllLeft(board);
+	printBoard(board);
+	cout << endl;
+	combineLeft(board, isWin);
+	printBoard(board);
+	cout << endl;
 
 
 
@@ -101,10 +110,11 @@ void printBoard(int board[][4])
 	return;
 }
 
+
 //function that will move everything over to the right
 void moveAllRight(int board[][4])
 {
-	int i, n;
+	int i;
 	int numThere = 0;
 
 	for (i = 0; i < 4; i++)
@@ -223,18 +233,12 @@ void moveAllRight(int board[][4])
 }
 
 
-
 //function that will handle the movement right
 void combineRight(int board[][4], bool &isWin)
 {
 	int numInSpot = 0;
 	int i;
-
-	//call the function to move everything to the right
-	//put things together if can
-	//move everything to the right again
-
-
+	
 	//move everything to the right
 	moveAllRight(board);
 
@@ -252,6 +256,11 @@ void combineRight(int board[][4], bool &isWin)
 				board[i][2] = 0;
 				board[i][3] = numInSpot * 2;
 				moveAllRight(board);
+				if (numInSpot * 2 == 2048)
+				{
+					isWin = true;
+					return;
+				}
 			}
 
 			//check if there's a number in third right most spot
@@ -264,6 +273,11 @@ void combineRight(int board[][4], bool &isWin)
 					board[i][1] = 0;
 					board[i][2] = numInSpot * 2;
 					moveAllRight(board);
+					if (numInSpot * 2 == 2048)
+					{
+						isWin = true;
+						return;
+					}
 				}
 
 				//check if there's anumber in the fourth right most spot
@@ -276,6 +290,11 @@ void combineRight(int board[][4], bool &isWin)
 						board[i][0] = 0;
 						board[i][1] = numInSpot * 2;
 						moveAllRight(board);
+						if (numInSpot * 2 == 2048)
+						{
+							isWin = true;
+							return;
+						}
 					}
 				}
 
@@ -283,101 +302,202 @@ void combineRight(int board[][4], bool &isWin)
 		}
 	}
 	
-	
-	
+	return;
+}
 
 
+//function that will move everything over to the left
+void moveAllLeft(int board[][4])
+{
+	int i;
+	int numThere = 0;
 
 
-	////check if one in first spot
-	//if (board[0][0] != 0)
-	//{
-	//	numInSpot = board[0][0];
+	for (i = 0; i < 4; i++)
+	{
+		//check if front is open
+		if (board[i][0] == 0)
+		{
+			if (board[i][1] != 0)
+			{
+				numThere = board[i][1];
+				board[i][1] = 0;
+				board[i][0] = numThere;
+			}
+			else if (board[i][1] == 0)
+			{
+				if (board[i][2] != 0)
+				{
+					numThere = board[i][2];
+					board[i][2] = 0;
+					board[i][1] = numThere;
+					if (board[i][0] == 0)
+					{
+						numThere = board[i][1];
+						board[i][1] = 0;
+						board[i][0] = numThere;
+					}
+				}
+				else if (board[i][2] == 0)
+				{
+					if (board[i][3] != 0)
+					{
+						numThere = board[i][3];
+						board[i][3] = 0;
+						board[i][2] = numThere;
+						if (board[i][1] == 0)
+						{
+							numThere = board[i][2];
+							board[i][2] = 0;
+							board[i][1] = numThere;
+							if (board[i][0] == 0)
+							{
+								numThere = board[i][1];
+								board[i][1] = 0;
+								board[i][0] = numThere;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		//check if spot 2 is open
+		if (board[i][1] == 0)
+		{
+			if (board[i][2] != 0)
+			{
+				numThere = board[i][2];
+				board[i][2] = 0;
+				board[i][1] = numThere;
+				if (board[i][0] == 0)
+				{
+					numThere = board[i][1];
+					board[i][1] = 0;
+					board[i][0] = numThere;
+				}
+			}
+			else if (board[i][2] == 0)
+			{
+				if (board[i][3] != 0)
+				{
+					numThere = board[i][3];
+					board[i][3] = 0;
+					board[i][2] = numThere;
+					if (board[i][1] == 0)
+					{
+						numThere = board[i][2];
+						board[i][2] = 0;
+						board[i][1] = numThere;
+						if (board[i][0] == 0)
+						{
+							numThere = board[i][1];
+							board[i][1] = 0;
+							board[i][0] = numThere;
+						}
+					}
+				}
+			}
+		}
+		
 
-	//	//check if can combine with second spot
-	//	if (board[0][1] == numInSpot)
-	//	{
-	//		board[0][0] = 0;
-	//		board[0][1] = numInSpot * numInSpot;
-	//		//check if can move all of the way over
-	//		if (board[0][2] == 0)
-	//		{
-	//			board[0][1] = 0;
-	//			board[0][2] == numInSpot * numInSpot;
-	//			//move over again if the next spot is zero
-	//			if (board[0][3] == 0)
-	//			{
-	//				board[0][1] = 0;
-	//				board[0][3] == numInSpot * numInSpot;
-	//			}
-	//		}
-	//	}
+		//check if spot 3 is open
+		if (board[i][2] == 0)
+		{
+			if (board[i][3] != 0)
+			{
+				numThere = board[i][3];
+				board[i][3] = 0;
+				board[i][2] = numThere;
+				if (board[i][1] == 0)
+				{
+					numThere = board[i][2];
+					board[i][2] = 0;
+					board[i][1] = numThere;
+					if (board[i][0] == 0)
+					{
+						numThere = board[i][1];
+						board[i][1] = 0;
+						board[i][0] = numThere;
+					}
+				}
+			}
+		}
+		
+	}
 
-	//	//check if can combine with third spot
-	//	if (board[0][2] == numInSpot)
-	//	{
-	//		board[0][0] = 0;
-	//		board[0][2] = numInSpot * numInSpot;
-	//		//check if can move all of the way over
-	//		if (board[0][3] == 0)
-	//		{
-	//			board[0][2] = 0;
-	//			board[0][3] = numInSpot * numInSpot;
-	//		}
-	//	}
+	return;
+}
 
-	//	//check if can combine with fourth spot
-	//	if (board[0][3] == numInSpot)
-	//	{
-	//		board[0][0] = 0;
-	//		board[0][3] = numInSpot * numInSpot;
-	//	}
-	//}
 
-	////check in second spot
-	//if (board[0][1] != 0)
-	//{
-	//	numInSpot = board[0][1];
+//function that will handle the movement left
+void combineLeft(int board[][4], bool &isWin)
+{
+	int numInSpot = 0;
+	int i;
 
-	//	//check if can combine with third spot
-	//	if (board[0][2] == numInSpot)
-	//	{
-	//		board[0][1] = 0;
-	//		board[0][2] = numInSpot * numInSpot;
-	//		//check if can move all of the way over
-	//		if (board[0][3] == 0)
-	//		{
-	//			board[0][2] = 0;
-	//			board[0][3] = numInSpot * numInSpot;
-	//		}
-	//	}
+	//move everything to the right
+	moveAllLeft(board);
 
-	//	//check if can combine with fourth spot
-	//	if (board[0][3] == numInSpot)
-	//	{
-	//		board[0][1] = 0;
-	//		board[0][3] = numInSpot * numInSpot;
-	//	}
+	//put things together
+	//start on the right side and work over
+	//will only do anything if the left most and second left most column has number
+	for (i = 0; i < 4; i++)
+	{
+		if (board[i][0] != 0 && board[i][1] != 0)
+		{
+			numInSpot = board[i][0];
+			//if the next one is combineable, combine them and move everything over
+			if (board[i][1] == numInSpot)
+			{
+				board[i][1] = 0;
+				board[i][0] = numInSpot * 2;
+				moveAllLeft(board);
+				if (numInSpot * 2 == 2048)
+				{
+					isWin = true;
+					return;
+				}
+			}
 
-	//}
+			//check if there's a number in third left most spot
+			//if there is a number, see if can combine
+			if (board[i][2] != 0)
+			{
+				numInSpot = board[i][2];
+				if (board[i][1] == numInSpot)
+				{
+					board[i][2] = 0;
+					board[i][1] = numInSpot * 2;
+					moveAllLeft(board);
+					if (numInSpot * 2 == 2048)
+					{
+						isWin = true;
+						return;
+					}
+				}
 
-	////check in third spot
-	//if (board[0][2] != 0)
-	//{
-	//	numInSpot = board[0][2];
+				//check if there's anumber in the fourth left most spot
+				//if there is a number, see if can combine
+				if (board[i][3] != 0)
+				{
+					numInSpot = board[i][3];
+					if (board[i][2] == numInSpot)
+					{
+						board[i][3] = 0;
+						board[i][2] = numInSpot * 2;
+						moveAllLeft(board);
+						if (numInSpot * 2 == 2048)
+						{
+							isWin = true;
+							return;
+						}
+					}
+				}
 
-	//	//check if can combine with fourth spot
-	//	if (board[0][3] == numInSpot)
-	//	{
-	//		board[0][2] = 0;
-	//		board[0][3] = numInSpot * numInSpot;
-	//	}
-
-	//}
-
-	//move everything over to the right
-	//start backwards
-
+			}
+		}
+	}
 
 
 	return;
