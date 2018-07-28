@@ -95,7 +95,13 @@ int main()
 	moveAllUp(board);
 	printBoard(board);
 	cout << endl;
+	combineUp(board, isWin);
+	printBoard(board);
+	cout << endl;
 	moveAllDown(board);
+	printBoard(board);
+	cout << endl;
+	combineDown(board, isWin);
 	printBoard(board);
 	cout << endl;
 
@@ -671,7 +677,71 @@ void moveAllUp(int board[][4])
 //function that will handle the movement up
 void combineUp(int board[][4], bool &isWin)
 {
+	int numInSpot = 0;
+	int i;
 
+	//move everything to the right
+	moveAllUp(board);
+
+	//put things together
+	//start on the top side and work up
+	//will only do anything if the up most and second up most column has number
+	for (i = 0; i < 4; i++)
+	{
+		if (board[0][i] != 0 && board[1][i] != 0)
+		{
+			numInSpot = board[0][i];
+			//if the next one is combineable, combine them and move everything over
+			if (board[1][i] == numInSpot)
+			{
+				board[1][i] = 0;
+				board[0][i] = numInSpot * 2;
+				moveAllUp(board);
+				if (numInSpot * 2 == 2048)
+				{
+					isWin = true;
+					return;
+				}
+			}
+
+			//check if there's a number in third up most spot
+			//if there is a number, see if can combine
+			if (board[2][i] != 0)
+			{
+				numInSpot = board[2][i];
+				if (board[1][i] == numInSpot)
+				{
+					board[2][i] = 0;
+					board[1][i] = numInSpot * 2;
+					moveAllUp(board);
+					if (numInSpot * 2 == 2048)
+					{
+						isWin = true;
+						return;
+					}
+				}
+
+				//check if there's anumber in the fourth up most spot
+				//if there is a number, see if can combine
+				if (board[3][i] != 0)
+				{
+					numInSpot = board[3][i];
+					if (board[2][i] == numInSpot)
+					{
+						board[3][i] = 0;
+						board[2][i] = numInSpot * 2;
+						moveAllUp(board);
+						if (numInSpot * 2 == 2048)
+						{
+							isWin = true;
+							return;
+						}
+					}
+				}
+
+			}
+		}
+	}
 	return;
 }
 
@@ -800,5 +870,71 @@ void moveAllDown(int board[][4])
 //function that will handle the movement down
 void combineDown(int board[][4], bool &isWin)
 {
+	int numInSpot = 0;
+	int i;
+
+	//move everything to the right
+	moveAllDown(board);
+
+	//put things together
+	//start on the bottom side and work over
+	//will only do anything if the bottom most and second bottom most column has number
+	for (i = 0; i < 4; i++)
+	{
+		if (board[3][i] != 0 && board[2][i] != 0)
+		{
+			numInSpot = board[i][3];
+			//if the next one is combineable, combine them and move everything over
+			if (board[2][i] == numInSpot)
+			{
+				board[2][i] = 0;
+				board[3][i] = numInSpot * 2;
+				moveAllDown(board);
+				if (numInSpot * 2 == 2048)
+				{
+					isWin = true;
+					return;
+				}
+			}
+
+			//check if there's a number in third bottom most spot
+			//if there is a number, see if can combine
+			if (board[1][i] != 0)
+			{
+				numInSpot = board[1][i];
+				if (board[2][i] == numInSpot)
+				{
+					board[1][i] = 0;
+					board[2][i] = numInSpot * 2;
+					moveAllDown(board);
+					if (numInSpot * 2 == 2048)
+					{
+						isWin = true;
+						return;
+					}
+				}
+
+				//check if there's anumber in the fourth bottom most spot
+				//if there is a number, see if can combine
+				if (board[0][i] != 0)
+				{
+					numInSpot = board[0][i];
+					if (board[1][i] == numInSpot)
+					{
+						board[0][i] = 0;
+						board[1][i] = numInSpot * 2;
+						moveAllDown(board);
+						if (numInSpot * 2 == 2048)
+						{
+							isWin = true;
+							return;
+						}
+					}
+				}
+
+			}
+		}
+	}
+
 	return;
 }
