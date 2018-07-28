@@ -64,52 +64,83 @@ int main()
 	}
 
 	//move everything on the board according to what the user has selected
+
+	//if the user selected 5, do the up move
+	if (userMove == 5)
+	{
+		moveAllUp(board);
+		combineUp(board, isWin);
+		printBoard(board);
+		cout << endl;
+	}
+
+	//if the user selected 2, do the down move
+	else if (userMove == 2)
+	{
+		moveAllDown(board);
+		combineDown(board, isWin);
+		printBoard(board);
+		cout << endl;
+	}
+
+	//if the user selected 1, do the left move
+	else if (userMove == 1)
+	{
+		moveAllLeft(board);
+		combineLeft(board, isWin);
+		printBoard(board);
+		cout << endl;
+	}
+
+	//if the user selected 3, do the right move
+	else if (userMove == 3)
+	{
+		moveAllRight(board);
+		combineRight(board, isWin);
+		printBoard(board);
+		cout << endl;
+	}
 	
-
-	//check if can move one spot over to combine
-	//check if can move two spots over to combine
-	//check if can move three spots over to combine
-
-	//test to see if everything is moved
-	//add random things to the board
-	board[0][0] = 4;
-	board[0][2] = 4;
-	board[0][3] = 5;
-	board[1][3] = 5;
-	board[1][2] = 6;
-	board[1][0] = 5;
-	board[2][2] = 8;
-	board[2][1] = 2;
-	board[3][0] = 2;
-	board[3][1] = 5;
-	board[3][3] = 10;
+	////test to see if everything is moved
+	////add random things to the board
+	//board[0][0] = 4;
+	//board[0][2] = 4;
+	//board[0][3] = 5;
+	//board[1][3] = 5;
+	//board[1][2] = 6;
+	//board[1][0] = 5;
+	//board[2][2] = 8;
+	//board[2][1] = 2;
+	//board[3][0] = 2;
 	//board[3][1] = 5;
-	printBoard(board);
-	/*moveAllRight(board);
-	cout << endl;
-	printBoard(board);
-	cout << endl;
-	combineRight(board, isWin);
-	printBoard(board);
-	cout << endl;
-	moveAllLeft(board);
-	printBoard(board);
-	cout << endl;
-	combineLeft(board, isWin);
-	printBoard(board);*/
-	cout << endl;
-	moveAllUp(board);
-	printBoard(board);
-	cout << endl;
-	combineUp(board, isWin);
-	printBoard(board);
-	cout << endl;
-	moveAllDown(board);
-	printBoard(board);
-	cout << endl;
-	combineDown(board, isWin);
-	printBoard(board);
-	cout << endl;
+	//board[3][3] = 10;
+	////board[3][1] = 5;
+	//printBoard(board);
+	//moveAllRight(board);
+	//cout << endl;
+	//printBoard(board);
+	//cout << endl;
+	//combineRight(board, isWin);
+	//printBoard(board);
+	//cout << endl;
+	//moveAllLeft(board);
+	//printBoard(board);
+	//cout << endl;
+	//combineLeft(board, isWin);
+	//printBoard(board);
+	//cout << endl;
+	//moveAllUp(board);
+	//printBoard(board);
+	//cout << endl;
+	//combineUp(board, isWin);
+	//printBoard(board);
+	//cout << endl;
+	//moveAllDown(board);
+	//printBoard(board);
+	//cout << endl;
+	//combineDown(board, isWin);
+	//printBoard(board);
+	//cout << endl;
 
 	fullBoard = isBoardFull(board);
 	if (fullBoard == true)
