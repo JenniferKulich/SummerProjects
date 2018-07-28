@@ -3,10 +3,12 @@
 using namespace std;
 
 void printBoard(int board[][4]);
+bool isBoardFull(int board[][4]);
 void moveAllRight(int board[][4]);
 void combineRight(int board[][4], bool &isWin);
 void moveAllLeft(int board[][4]);
 void combineLeft(int board[][4], bool &isWin);
+
 
 int main()
 {
@@ -14,6 +16,7 @@ int main()
 	int i, n;
 	int userMove = 0;
 	bool isWin = false;
+	bool fullBoard;
 
 	//set the whole board to zero
 	for (i = 0; i < 4; i++)
@@ -85,7 +88,12 @@ int main()
 	printBoard(board);
 	cout << endl;
 
-
+	fullBoard = isBoardFull(board);
+	if (fullBoard == true)
+	{
+		cout << "Sorry! The board is full and a move cannot be made" << endl;
+		return 0;
+	}
 
 
 	return 0;
@@ -108,6 +116,26 @@ void printBoard(int board[][4])
 	}
 
 	return;
+}
+
+
+//function that will check if the entire board is full and no moves can be made
+bool isBoardFull(int board[][4])
+{
+	int i, n;
+
+	//loop through and look for a 0
+	//if there is a zero, the board is not full
+	for (i = 0; i < 4; i++)
+	{
+		for (n = 0; n < 4; n++)
+		{
+			if (board[i][n] == 0)
+				return false;
+		}
+	}
+
+	return true;
 }
 
 
