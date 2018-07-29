@@ -61,79 +61,105 @@ int main()
 	//move everything on the board according to what the user has selected
 	
 	//loop through until the puzzle is won
-	//do {
+	do {
 
-	//	//ask the user what move they would like to make
-	//	cin >> userMove;
-	//	while (userMove != 5 && userMove != 2 && userMove != 1 && userMove != 3)
-	//	{
-	//		cout << "Please enter a correct move" << endl;
-	//		cin >> userMove;
-	//	}
+		//ask the user what move they would like to make
+		cin >> userMove;
+		while (userMove != 5 && userMove != 2 && userMove != 1 && userMove != 3)
+		{
+			cout << "Please enter a correct move" << endl;
+			cin >> userMove;
+		}
 
 
-	//	//if the user selected 5, do the up move
-	//	if (userMove == 5)
-	//	{
-	//		moveAllUp(board);
-	//		combineUp(board, isWin);
-	//		printBoard(board);
-	//		cout << endl;
-	//	}
+		//if the user selected 5, do the up move
+		if (userMove == 5)
+		{
+			moveAllUp(board);
+			combineUp(board, isWin);
+			printBoard(board);
+			cout << endl;
+		}
 
-	//	//if the user selected 2, do the down move
-	//	else if (userMove == 2)
-	//	{
-	//		moveAllDown(board);
-	//		combineDown(board, isWin);
-	//		printBoard(board);
-	//		cout << endl;
-	//	}
+		//if the user selected 2, do the down move
+		else if (userMove == 2)
+		{
+			moveAllDown(board);
+			combineDown(board, isWin);
+			printBoard(board);
+			cout << endl;
+		}
 
-	//	//if the user selected 1, do the left move
-	//	else if (userMove == 1)
-	//	{
-	//		moveAllLeft(board);
-	//		combineLeft(board, isWin);
-	//		printBoard(board);
-	//		cout << endl;
-	//	}
+		//if the user selected 1, do the left move
+		else if (userMove == 1)
+		{
+			moveAllLeft(board);
+			combineLeft(board, isWin);
+			printBoard(board);
+			cout << endl;
+		}
 
-	//	//if the user selected 3, do the right move
-	//	else if (userMove == 3)
-	//	{
-	//		moveAllRight(board);
-	//		combineRight(board, isWin);
-	//		printBoard(board);
-	//		cout << endl;
-	//	}
+		//if the user selected 3, do the right move
+		else if (userMove == 3)
+		{
+			moveAllRight(board);
+			combineRight(board, isWin);
+			printBoard(board);
+			cout << endl;
+		}
 
-	//	//check if the board is full
-	//	fullBoard = isBoardFull(board);
-	//	if (fullBoard == true)
-	//	{
-	//		cout << "Sorry! The board is full and a move cannot be made" << endl;
-	//		return 0;
-	//	}
+		//check if the board is full
+		fullBoard = isBoardFull(board);
+		if (fullBoard == true)
+		{
+			cout << "Sorry! The board is full and a move cannot be made" << endl;
+			return 0;
+		}
 
-	//	//if the board is not full, add a new number
-	//	placeNewRandom(board);
+		//if the board is not full, add a new number
+		placeNewRandom(board);
 
-	//} while (isWin == false);
+	} while (isWin == false);
 	
 	
 	//test to see if the down is working correctly
-	board[3][0] = 2;
+	//test for moving up
+	/*board[3][0] = 2;
 	board[2][0] = 2;
-	cout << endl;
+	board[3][3] = 5;
+	board[3][2] = 5;
+	board[2][2] = 6;*/
+
+	////test for moving left
+	//board[3][0] = 2;
+	//board[3][1] = 2;
+	//board[0][1] = 4;
+	//board[0][2] = 4;
+	//board[1][3] = 5;
+	//board[1][2] = 5;
+
+
+	/*cout << endl;
 	moveAllDown(board);
 	printBoard(board);
 	cout << endl;
 	combineDown(board, isWin);
 	printBoard(board);
-	cout << endl;
+	cout << endl;*/
 
-	cout << "Test to see if up is working" << endl;
+
+
+	/*cout << "Test to see if left is working" << endl;
+	printBoard(board);
+	cout << endl;
+	moveAllLeft(board);
+	printBoard(board);
+	cout << endl;
+	combineLeft(board, isWin);
+	printBoard(board);
+	cout << endl;*/
+
+	/*cout << "Test to see if up is working" << endl;
 	printBoard(board);
 	cout << endl;
 	moveAllUp(board);
@@ -141,7 +167,7 @@ int main()
 	cout << endl;
 	combineUp(board, isWin);
 	printBoard(board);
-	cout << endl;
+	cout << endl;*/
 
 	
 
@@ -637,9 +663,9 @@ void moveAllUp(int board[][4])
 			{
 				if (board[2][i] != 0)
 				{
-					numThere = board[3][i];
+					numThere = board[2][i];
 					board[2][i] = 0;
-					board[2][i] = numThere;
+					board[1][i] = numThere;
 					if (board[0][i] == 0)
 					{
 						numThere = board[1][i];
@@ -656,9 +682,9 @@ void moveAllUp(int board[][4])
 						board[2][i] = numThere;
 						if (board[1][i] == 0)
 						{
-							numThere = board[3][i];
+							numThere = board[2][i];
 							board[2][i] = 0;
-							board[2][i] = numThere;
+							board[1][i] = numThere;
 							if (board[0][i] == 0)
 							{
 								numThere = board[1][i];
@@ -671,7 +697,7 @@ void moveAllUp(int board[][4])
 			}
 		}
 
-		//check if row 1 is open
+		//check if spot 2 is open
 		if (board[1][i] == 0)
 		{
 			if (board[2][i] != 0)
@@ -710,7 +736,7 @@ void moveAllUp(int board[][4])
 		}
 
 
-		//check if row 2 is open
+		//check if spot 3 is open
 		if (board[2][i] == 0)
 		{
 			if (board[3][i] != 0)
