@@ -6,6 +6,8 @@ using namespace std;
 
 void printBoard(int board[][4]);
 bool isBoardFull(int board[][4]);
+void getOrigionalBoard(int board[][4], int origionalBoard[][4]);
+bool checkIfOrigionalBoard(int board[][4], int origionalBoard[][4]);
 void placeNewRandom(int board[][4]);
 void moveAllRight(int board[][4]);
 void combineRight(int board[][4], bool &isWin);
@@ -16,15 +18,26 @@ void combineUp(int board[][4], bool &isWin);
 void moveAllDown(int board[][4]);
 void combineDown(int board[][4], bool &isWin);
 
+/*
+if everything already moved over as far as possible and combination
+cannot be made, then nothing will be done and user must input a new direction
+No new number will be added.
+
+do an origional board check. if they're the same, then if they're the same,
+don't place a new random number.
+
+*/
 
 
 int main()
 {
 	int board[4][4];
+	int origionalBoard[4][4];
 	int i, n;
 	int userMove = 0;
 	bool isWin = false;
 	bool fullBoard;
+	bool isOrigional;
 
 	//set the whole board to zero
 	for (i = 0; i < 4; i++)
@@ -75,6 +88,7 @@ int main()
 		//if the user selected 5, do the up move
 		if (userMove == 5)
 		{
+			getOrigionalBoard(board, origionalBoard);
 			moveAllUp(board);
 			combineUp(board, isWin);
 			printBoard(board);
@@ -84,6 +98,7 @@ int main()
 		//if the user selected 2, do the down move
 		else if (userMove == 2)
 		{
+			getOrigionalBoard(board, origionalBoard);
 			moveAllDown(board);
 			combineDown(board, isWin);
 			printBoard(board);
@@ -93,6 +108,7 @@ int main()
 		//if the user selected 1, do the left move
 		else if (userMove == 1)
 		{
+			getOrigionalBoard(board, origionalBoard);
 			moveAllLeft(board);
 			combineLeft(board, isWin);
 			printBoard(board);
@@ -102,6 +118,7 @@ int main()
 		//if the user selected 3, do the right move
 		else if (userMove == 3)
 		{
+			getOrigionalBoard(board, origionalBoard);
 			moveAllRight(board);
 			combineRight(board, isWin);
 			printBoard(board);
@@ -112,13 +129,19 @@ int main()
 		fullBoard = isBoardFull(board);
 		if (fullBoard == true)
 		{
-			cout << "Sorry! The board is full and a move cannot be made" << endl;
+			cout << "Sorry! The board is full and a move can't be made" << endl;
 			return 0;
 		}
 
-		//if the board is not full, add a new number
-		placeNewRandom(board);
-
+		//check if the board is the same as the origional board
+		//if the board is not full, and is not origional board, add a new number
+		isOrigional = checkIfOrigionalBoard(board, origionalBoard);
+		if (isOrigional == false)
+		{
+			placeNewRandom(board);
+		}
+		
+		
 	} while (isWin == false);
 	
 	
@@ -187,7 +210,10 @@ void printBoard(int board[][4])
 	{
 		for (n = 0; n < 4; n++)
 		{
-			cout << board[i][n] << " ";
+			if (board[i][n] < 10)
+				cout << board[i][n] << "  ";
+			else
+				cout << board[i][n] << " ";
 		}
 		
 		cout << endl;
@@ -213,6 +239,41 @@ bool isBoardFull(int board[][4])
 		}
 	}
 
+	return true;
+}
+
+
+//function that will copy the board into a new board which will be done
+//before anything will be done to the board
+//used as an origional board check
+void getOrigionalBoard(int board[][4], int origionalBoard[][4])
+{
+	int i, n;
+
+	//copy the board to the origional board
+	for (i = 0; i < 4; i++)
+	{
+		for (n = 0; n < 4; n++)
+		{
+			origionalBoard[i][n] = board[i][n];
+		}
+	}
+	return;
+}
+
+
+//function that will compare the origional board to the actual board
+bool checkIfOrigionalBoard(int board[][4], int origionalBoard[][4])
+{
+	int i, n;
+	for (i = 0; i < 4; i++)
+	{
+		for (n = 0; n < 4; n++)
+		{
+			if (board[i][n] != origionalBoard[i][n])
+				return false;
+		}
+	}
 	return true;
 }
 
