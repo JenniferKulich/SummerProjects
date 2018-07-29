@@ -69,7 +69,6 @@ int main()
 	//1 is LEFT
 	//3 is RIGHT
 
-	
 
 	//move everything on the board according to what the user has selected
 	
@@ -91,8 +90,6 @@ int main()
 			getOrigionalBoard(board, origionalBoard);
 			moveAllUp(board);
 			combineUp(board, isWin);
-			printBoard(board);
-			cout << endl;
 		}
 
 		//if the user selected 2, do the down move
@@ -101,8 +98,6 @@ int main()
 			getOrigionalBoard(board, origionalBoard);
 			moveAllDown(board);
 			combineDown(board, isWin);
-			printBoard(board);
-			cout << endl;
 		}
 
 		//if the user selected 1, do the left move
@@ -111,8 +106,6 @@ int main()
 			getOrigionalBoard(board, origionalBoard);
 			moveAllLeft(board);
 			combineLeft(board, isWin);
-			printBoard(board);
-			cout << endl;
 		}
 
 		//if the user selected 3, do the right move
@@ -121,8 +114,6 @@ int main()
 			getOrigionalBoard(board, origionalBoard);
 			moveAllRight(board);
 			combineRight(board, isWin);
-			printBoard(board);
-			cout << endl;
 		}
 
 		//check if the board is full
@@ -139,64 +130,18 @@ int main()
 		if (isOrigional == false)
 		{
 			placeNewRandom(board);
+			printBoard(board);
 		}
+		else
+			printBoard(board);
+
+		
 		
 		
 	} while (isWin == false);
 	
 	
-	//test to see if the down is working correctly
-	//test for moving up
-	/*board[3][0] = 2;
-	board[2][0] = 2;
-	board[3][3] = 5;
-	board[3][2] = 5;
-	board[2][2] = 6;*/
-
-	////test for moving left
-	//board[3][0] = 2;
-	//board[3][1] = 2;
-	//board[0][1] = 4;
-	//board[0][2] = 4;
-	//board[1][3] = 5;
-	//board[1][2] = 5;
-
-
-	/*cout << endl;
-	moveAllDown(board);
-	printBoard(board);
-	cout << endl;
-	combineDown(board, isWin);
-	printBoard(board);
-	cout << endl;*/
-
-
-
-	/*cout << "Test to see if left is working" << endl;
-	printBoard(board);
-	cout << endl;
-	moveAllLeft(board);
-	printBoard(board);
-	cout << endl;
-	combineLeft(board, isWin);
-	printBoard(board);
-	cout << endl;*/
-
-	/*cout << "Test to see if up is working" << endl;
-	printBoard(board);
-	cout << endl;
-	moveAllUp(board);
-	printBoard(board);
-	cout << endl;
-	combineUp(board, isWin);
-	printBoard(board);
-	cout << endl;*/
-
 	
-
-	
-
-
 	return 0;
 }
 
@@ -205,19 +150,42 @@ int main()
 void printBoard(int board[][4])
 {
 	int i, n;
+	char ulc = (char)218;
+	char hl = (char)196;
+	char urc = (char)191;
+	char vl = (char)179;
+	char blc = (char)192;
+	char brc = (char)217;
+
+	cout << endl;
+	//top row
+	cout << ulc  << hl << hl << hl << hl << hl << hl << hl << hl
+		<< hl << hl << hl << hl << hl << hl << hl << hl << hl << hl
+		<< hl << hl << hl << hl << hl << hl << hl << urc << endl;
 
 	for (i = 0; i < 4; i++)
 	{
+		cout << vl << "    ";
 		for (n = 0; n < 4; n++)
 		{
+			
 			if (board[i][n] < 10)
+				cout << board[i][n] << "    ";
+			if (board[i][n] < 100 && board[i][n] > 10)
+				cout << board[i][n] << "   ";
+			if (board[i][n] > 100 && board[i][n] < 1000)
 				cout << board[i][n] << "  ";
-			else
+			if (board[i][n] > 1000)
 				cout << board[i][n] << " ";
 		}
 		
-		cout << endl;
+		cout << " " << vl << endl;
 	}
+	//bottom row
+	cout << blc << hl << hl << hl << hl << hl << hl << hl << hl
+		<< hl << hl << hl << hl << hl << hl << hl << hl << hl << hl
+		<< hl << hl << hl << hl << hl << hl << hl << brc << endl;
+
 
 	return;
 }
@@ -266,15 +234,24 @@ void getOrigionalBoard(int board[][4], int origionalBoard[][4])
 bool checkIfOrigionalBoard(int board[][4], int origionalBoard[][4])
 {
 	int i, n;
+	bool isSame = true; 
+	int boardNumber, origionalBoardNumber;
+
 	for (i = 0; i < 4; i++)
 	{
 		for (n = 0; n < 4; n++)
 		{
-			if (board[i][n] != origionalBoard[i][n])
-				return false;
+			boardNumber = board[i][n];
+			origionalBoardNumber = origionalBoard[i][n];
+			if (boardNumber != origionalBoardNumber)
+				isSame = false;
 		}
 	}
-	return true;
+	
+	if (isSame == false)
+		return false;
+	else
+		return true;
 }
 
 
