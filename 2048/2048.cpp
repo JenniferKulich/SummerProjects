@@ -53,7 +53,7 @@ int main()
 
 	//print out the game begin
 	cout << "Game has begun" << endl;
-	cout << "Press 'Q' any time to quit the game" << endl;
+	cout << "Press 0 any time to QUIT the game" << endl;
 	cout << "Press 5 for UP" << endl;
 	cout << "Press 2 for DOWN" << endl;
 	cout << "Press 1 for LEFT" << endl;
@@ -77,12 +77,17 @@ int main()
 
 		//ask the user what move they would like to make
 		cin >> userMove;
-		while (userMove != 5 && userMove != 2 && userMove != 1 && userMove != 3)
+		while (userMove != 5 && userMove != 2 && userMove != 1 && userMove != 3
+			&& userMove != 0)
 		{
 			cout << "Please enter a correct move" << endl;
 			cin >> userMove;
 		}
 
+
+		//if user selected 0, quit the game
+		if (userMove == 0)
+			return 0;
 
 		//if the user selected 5, do the up move
 		if (userMove == 5)
@@ -237,6 +242,7 @@ bool checkIfOrigionalBoard(int board[][4], int origionalBoard[][4])
 	bool isSame = true; 
 	int boardNumber, origionalBoardNumber;
 
+	//loop through and compare the board numbers
 	for (i = 0; i < 4; i++)
 	{
 		for (n = 0; n < 4; n++)
