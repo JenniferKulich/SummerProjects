@@ -1,13 +1,25 @@
 #include <iostream>
+#include <iomanip>
+#include <windows.h>
 
 using namespace std;
 
 void printBoard(char board[][10]);
 
+
 int main()
 {
 
 	char board[20][10];
+	char boardColors[20][10];
+	int i, n;
+
+	//initialize the board colors to blank- no colors in there
+	for (i = 0; i < 20; i++)
+	{
+		for (n = 0; n < 10; n++)
+			boardColors[i][n] = 0; //nothing in the spot based on colors
+	}
 
 	/*int i, n;
 
@@ -18,7 +30,32 @@ int main()
 			board[i][n] = 66;
 		}
 	}*/
-	
+	/*
+	The different color codes are
+
+	0   BLACK
+	1   BLUE
+	2   GREEN
+	3   CYAN
+	4   RED
+	5   MAGENTA
+	6   BROWN
+	7   LIGHTGRAY
+	8   DARKGRAY
+	9   LIGHTBLUE
+	10  LIGHTGREEN
+	11  LIGHTCYAN
+	12  LIGHTRED
+	13  LIGHTMAGENTA
+	14  YELLOW
+	15  WHITE
+	*/
+
+	//what is needed to change colors or text
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 3);
+	cout << "\n\n\n\t\t\t\tHELLO!\n\n";
+
+	//SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 
 	printBoard(board);
 
@@ -37,6 +74,9 @@ void printBoard(char board[][10])
 	char urc = (char)187; //upper right corner
 	char llc = (char)200; //lower left corner
 	char lrc = (char)188; //lower right corner
+
+	//set the border and everything inside to white- everything inside should not be white though
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
 	//top line
 	cout << ulc << hl << hl << hl << hl << hl << hl << hl << hl << hl << hl <<
@@ -63,3 +103,4 @@ void printBoard(char board[][10])
 
 	return;
 }
+
