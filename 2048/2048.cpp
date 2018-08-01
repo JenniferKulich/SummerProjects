@@ -18,16 +18,6 @@ void combineUp(int board[][4], bool &isWin);
 void moveAllDown(int board[][4]);
 void combineDown(int board[][4], bool &isWin);
 
-/*
-if everything already moved over as far as possible and combination
-cannot be made, then nothing will be done and user must input a new direction
-No new number will be added.
-
-do an origional board check. if they're the same, then if they're the same,
-don't place a new random number.
-
-*/
-
 
 int main()
 {
@@ -63,15 +53,8 @@ int main()
 	//print the board
 	printBoard(board);
 
-	//get user which way they would like to move the player
-	//5 is UP
-	//2 is DOWN
-	//1 is LEFT
-	//3 is RIGHT
-
-
-	//move everything on the board according to what the user has selected
 	
+	//move everything on the board according to what the user has selected	
 	//loop through until the puzzle is won
 	do {
 
