@@ -135,6 +135,7 @@ int main()
 		if (isOrigional == false)
 		{
 			placeNewRandom(board);
+			system("CLS");
 			printBoard(board);
 		}
 		else
