@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
+#include "Blocks.h"
 
 using namespace std;
 
@@ -52,12 +53,13 @@ int main()
 	*/
 
 	//what is needed to change colors or text
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 3);
-	cout << "\n\n\n\t\t\t\tHELLO!\n\n";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+	cout << "HELLO!\n\n";
+	int color = 1;
 
-	//SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
+	startIBlock(boardColors, color);
 
-	printBoard(board);
+	printBoard(boardColors);
 
 
 	return 0;
