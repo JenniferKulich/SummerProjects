@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <windows.h>
 #include "Blocks.h"
+#include "MoveBlocks.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ int main()
 	char board[20][10];
 	char boardColors[20][10];
 	int i, n;
+	int startSpot = 0;
 
 	//initialize the board colors to blank- no colors in there
 	for (i = 0; i < 20; i++)
@@ -57,7 +59,12 @@ int main()
 	cout << "HELLO!\n\n";
 	int color = 1;
 
-	startIBlock(boardColors, color);
+	startIBlock(boardColors, color, startSpot);
+
+	printBoard(boardColors);
+	cout << endl;
+
+	moveHorizontalIBlock(boardColors, 66, startSpot, 1, 0);
 
 	printBoard(boardColors);
 

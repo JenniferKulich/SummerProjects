@@ -4,9 +4,8 @@
 
 
 //function that will start the I block when it appears
-void startIBlock(char boardColors[][10], int color)
+void startIBlock(char boardColors[][10], int color, int &startSpot)
 {
-	int startSpot;
 	char colorName;
 	int i;
 
@@ -31,9 +30,8 @@ void startIBlock(char boardColors[][10], int color)
 
 
 //function that will start the J block when it appears 
-void startJBlock(char boardColors[][10], int color)
+void startJBlock(char boardColors[][10], int color, int &startSpot)
 {
-	int startSpot;
 	char colorName;
 	int i;
 
@@ -60,9 +58,8 @@ void startJBlock(char boardColors[][10], int color)
 
 
 //function that will start the L block when it appears
-void startLBlock(char boardColors[][10], int color)
+void startLBlock(char boardColors[][10], int color, int &startSpot)
 {
-	int startSpot;
 	char colorName;
 	int i;
 
@@ -88,9 +85,8 @@ void startLBlock(char boardColors[][10], int color)
 
 
 //function that will start the O block when it appears
-void startOBlock(char boardColors[][10], int color)
+void startOBlock(char boardColors[][10], int color, int &startSpot)
 {
-	int startSpot;
 	char colorName;
 	int i;
 
@@ -116,9 +112,8 @@ void startOBlock(char boardColors[][10], int color)
 
 
 //function that will start the S block when it appears
-void startSBlock(char boardColors[][10], int color)
+void startSBlock(char boardColors[][10], int color, int &startSpot)
 {
-	int startSpot;
 	char colorName;
 	int i;
 
@@ -144,9 +139,8 @@ void startSBlock(char boardColors[][10], int color)
 
 
 //function that will start the T block when it appears
-void startTBlock(char boardColors[][10], int color)
+void startTBlock(char boardColors[][10], int color, int &startSpot)
 {
-	int startSpot;
 	char colorName;
 	int i;
 
@@ -171,9 +165,8 @@ void startTBlock(char boardColors[][10], int color)
 
 
 //function that will start the Z block when it appears
-void startZBlock(char boardColors[][10], int color)
+void startZBlock(char boardColors[][10], int color, int &startSpot)
 {
-	int startSpot;
 	char colorName;
 	int i;
 
@@ -243,5 +236,5 @@ char getColorName(int color)
 	else 
 		return 82; //"R"
 
-	
 }
+
