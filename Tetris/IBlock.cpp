@@ -3,7 +3,6 @@
 //3 is RIGHT
 //1 is LEFT
 //6 is CLOCKWISE
-//4 is COUNTER CLOCKWISE
 
 
 //function that will move the horizontal I block left, or right
@@ -86,74 +85,66 @@ void moveVerticalIBlock(char boardColors[][10], char colorName, int &startSpot, 
 
 
 //function that will turn the horizontal block 
-void turnHorizontalIBlock(char boardColors[][10], char colorName, int &startSpot, int userMove, int row)
+void turnHorizontalIBlock(char boardColors[][10], char colorName, int &startSpot, int row)
 {
 	int i;
 	int newRow = 0;
 	bool canMove = true;
 
-	//if the user move is 6 or 4, turn the block clockwise
-	if (userMove == 6 || userMove == 4)
+	//check to see if can turn block, turn it clockwise rotating on left side 
+	for (i = row + 1; i < row + 4; i++)
 	{
-		//check to see if can turn block, turn it clockwise rotating on left side 
-		for (i = row + 1; i < row + 4; i++)
-		{
-			if (boardColors[i][startSpot] != 00)
-				canMove = false;
-		}
-
-		//if can move is still true, turn the block
-		if (canMove == true)
-		{
-			newRow = row;
-			for (i = startSpot + 1; i < startSpot + 4; i++)
-			{
-				boardColors[row][i] = 00;
-				boardColors[newRow + 1][startSpot] = colorName;
-				newRow = newRow + 1;
-			}
-		}
+		if (boardColors[i][startSpot] != 00)
+			canMove = false;
 	}
 
+	//if can move is still true, turn the block
+	if (canMove == true)
+	{
+		newRow = row;
+		for (i = startSpot + 1; i < startSpot + 4; i++)
+		{
+			boardColors[row][i] = 00;
+			boardColors[newRow + 1][startSpot] = colorName;
+			newRow = newRow + 1;
+		}
+	}
 
 	return;
 }
 
 
 //function that will turn the horizontal block
-void turnVerticalIBlock(char boardColors[][10], char colorName, int &startSpot, int userMove, int row)
+void turnVerticalIBlock(char boardColors[][10], char colorName, int &startSpot, int row)
 {
 	int i;
 	int newRow = 0;
 	bool canMove = true;
 
-	//if the user move is 6 or 4, turn the block clockwise
-	if (userMove == 6 || userMove == 4)
+	
+	//check to see if can turn block, turn it clockwise rotating on top side 
+	if (startSpot <= 6)
 	{
-		//check to see if can turn block, turn it clockwise rotating on top side 
-		//WORKING HERE
-		if (startSpot <= 6)
+		//go through to check that there's nothing there
+		for (i = startSpot + 1; i < startSpot + 4; i++)
 		{
-			//go through to check that there's nothing there
-			for (i = startSpot + 1; i < startSpot + 4; i++)
-			{
-				if (boardColors[row][i] != 00)
-					canMove = false;
-			}
-		}
-		
-		//if can move is still true, turn the block
-		if (canMove == true)
-		{
-			newRow = row;
-			for (i = startSpot + 1; i < startSpot + 4; i++)
-			{
-				boardColors[row][i] = colorName;
-				boardColors[newRow + 1][startSpot] = 00;
-				newRow = newRow + 1;
-			}
+			if (boardColors[row][i] != 00)
+				canMove = false;
 		}
 	}
+
+	//if can move is still true, turn the block
+	if (canMove == true)
+	{
+		newRow = row;
+		for (i = startSpot + 1; i < startSpot + 4; i++)
+		{
+			boardColors[row][i] = colorName;
+			boardColors[newRow + 1][startSpot] = 00;
+			newRow = newRow + 1;
+		}
+	}
+
 	return;
 }
 
@@ -170,6 +161,8 @@ void downHorizontalIBlock(char boardColors[][10], char colorName, int &startSpot
 		if (boardColors[row + 1][i] != 00)
 			canMove = false;
 	}
+	if (row == 19)
+		canMove = false;
 
 	//if cannot move down, set doneMoving to true
 	if (canMove == false)
@@ -191,6 +184,8 @@ void downHorizontalIBlock(char boardColors[][10], char colorName, int &startSpot
 			if (boardColors[row][i] != 00)
 				canMove = false;
 		}
+		if (row == 19)
+			canMove = false;
 
 		//if there's something below it, will not move any more, and doneMoving will be true
 		if (canMove == false)
@@ -212,7 +207,7 @@ void downVerticalIBlock(char boardColors[][10], char colorName, int &startSpot, 
 	bool canMove = true;
 
 	//check to see if can move down
-	if (boardColors[row + 4][startSpot] != 00)
+	if (boardColors[row + 4][startSpot] != 00 || row == 19)
 		canMove = false;
 
 	//if cannot move down, set doneMoving to true
@@ -227,7 +222,7 @@ void downVerticalIBlock(char boardColors[][10], char colorName, int &startSpot, 
 		row = row + 1;
 
 		//check to see if the there's anything below it
-		if (boardColors[row + 4][startSpot] != 00)
+		if (boardColors[row + 4][startSpot] != 00 || row == 19)
 			canMove = false;
 
 		//if there's something below it, will not move any more, and doneMoving will be true

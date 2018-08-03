@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "Blocks.h"
 #include "IBlock.h"
+#include "TBlock.h"
 
 using namespace std;
 
@@ -61,13 +62,53 @@ int main()
 	cout << "HELLO!\n\n";
 	int color = 1;
 
-	startIBlock(boardColors, color, startSpot);
+	//startIBlock(boardColors, color, startSpot);
+	startTBlock(boardColors, color, startSpot);
+
+	printBoard(boardColors);
+	cout << endl;
+
+	down1TBlock(boardColors, 66, startSpot, row, doneMoving);
 
 	printBoard(boardColors);
 	cout << endl;
 
 	//moveHorizontalIBlock(boardColors, 66, startSpot, 1, 0);
-	turnHorizontalIBlock(boardColors, 66, startSpot, 6, 0);
+	//move1TBlock(boardColors, 66, startSpot, 1, 0);
+	turn1TBlock(boardColors, 66, startSpot, row);
+
+	printBoard(boardColors);
+	cout << endl;
+
+	down2TBlock(boardColors, 66, startSpot, row, doneMoving);
+
+	printBoard(boardColors);
+	cout << endl;
+
+	turn2TBlock(boardColors, 66, startSpot, row);
+
+	printBoard(boardColors);
+	cout << endl;
+
+	down3TBlock(boardColors, 66, startSpot, row, doneMoving);
+	//move2TBlock(boardColors, 66, startSpot, 1, row);
+	//move3TBlock(boardColors, 66, startSpot, 1, row);
+
+	turn3TBlock(boardColors, 66, startSpot, row);
+
+	printBoard(boardColors);
+	cout << endl;
+
+	down4TBlock(boardColors, 66, startSpot, row, doneMoving);
+
+	printBoard(boardColors);
+	cout << endl;
+	//move4TBlock(boardColors, 66, startSpot, 1, row);
+	turn4TBlock(boardColors, 66, startSpot, row);
+
+
+	
+	//turnHorizontalIBlock(boardColors, 66, startSpot,  0);
 
 	//printBoard(boardColors);
 	//cout << endl;
@@ -75,7 +116,8 @@ int main()
 	//downHorizontalIBlock(boardColors, 66, startSpot, row, doneMoving);
 	//downVerticalIBlock(boardColors, 66, startSpot, row, doneMoving);
 
-	//turnVerticalIBlock(boardColors, 66, startSpot, 6, 0);
+	//turnVerticalIBlock(boardColors, 66, startSpot, 0);
+	
 
 	printBoard(boardColors);
 

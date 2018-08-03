@@ -148,17 +148,18 @@ void startTBlock(char boardColors[][10], int color, int &startSpot)
 	//make sure it is a number less than 8
 	srand(time(NULL));
 
-	//get random number between 0 and 8
-	startSpot = rand() % 8;
+	//get random number between 1 and 8
+	startSpot = rand() % 7 + 1;
 
 	//call the color name function to get the name to put into the board
 	colorName = getColorName(color);
 
 
 	//loop through at add the other colors
-	boardColors[0][startSpot + 1] = colorName;
-	for (i = startSpot; i < startSpot + 3; i++)
-		boardColors[1][i] = colorName;
+	boardColors[0][startSpot] = colorName;
+	boardColors[1][startSpot - 1] = colorName;
+	boardColors[1][startSpot] = colorName;
+	boardColors[1][startSpot + 1] = colorName;
 
 	return;
 }

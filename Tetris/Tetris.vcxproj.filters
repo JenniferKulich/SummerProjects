@@ -24,12 +24,18 @@
     <ClCompile Include="IBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blocks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
