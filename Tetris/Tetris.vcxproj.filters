@@ -21,7 +21,7 @@
     <ClCompile Include="Blocks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveBlocks.cpp">
+    <ClCompile Include="IBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="Blocks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveBlocks.h">
+    <ClInclude Include="IBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
