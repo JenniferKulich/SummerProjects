@@ -2,7 +2,7 @@
 
 //3 is RIGHT
 //1 is LEFT
-//6 is CLOCKWISE
+
 
 
 //function that will move the first, upright, version of the T block to the left or right

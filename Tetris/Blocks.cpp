@@ -75,10 +75,9 @@ void startLBlock(char boardColors[][10], int color, int &startSpot)
 
 
 	//go through and put the color name on the board
-	boardColors[0][startSpot + 2] = colorName;
-	//loop through at add the other colors
-	for (i = startSpot; i < startSpot + 3; i++)
-		boardColors[1][i] = colorName;
+	for (i = 0; i < 3; i++)
+		boardColors[i][startSpot] = colorName;
+	boardColors[2][startSpot + 1] = colorName;
 
 	return;
 }

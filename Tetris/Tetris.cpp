@@ -4,6 +4,7 @@
 #include "Blocks.h"
 #include "IBlock.h"
 #include "TBlock.h"
+#include "LBlock.h"
 
 using namespace std;
 
@@ -62,61 +63,58 @@ int main()
 	cout << "HELLO!\n\n";
 	int color = 1;
 
-	//startIBlock(boardColors, color, startSpot);
-	startTBlock(boardColors, color, startSpot);
+	//startIBlock(boardColors, color, startSpot); //need to start the row as 0
+	//startTBlock(boardColors, color, startSpot); //need to start the row as 0
+	startLBlock(boardColors, color, startSpot); //need to start the row as 2
+	row = 2;
 
 	printBoard(boardColors);
 	cout << endl;
 
-	down1TBlock(boardColors, 66, startSpot, row, doneMoving);
-
-	printBoard(boardColors);
-	cout << endl;
-
-	//moveHorizontalIBlock(boardColors, 66, startSpot, 1, 0);
-	//move1TBlock(boardColors, 66, startSpot, 1, 0);
-	turn1TBlock(boardColors, 66, startSpot, row);
-
-	printBoard(boardColors);
-	cout << endl;
-
-	down2TBlock(boardColors, 66, startSpot, row, doneMoving);
-
-	printBoard(boardColors);
-	cout << endl;
-
-	turn2TBlock(boardColors, 66, startSpot, row);
-
-	printBoard(boardColors);
-	cout << endl;
-
-	down3TBlock(boardColors, 66, startSpot, row, doneMoving);
-	//move2TBlock(boardColors, 66, startSpot, 1, row);
-	//move3TBlock(boardColors, 66, startSpot, 1, row);
-
-	turn3TBlock(boardColors, 66, startSpot, row);
-
-	printBoard(boardColors);
-	cout << endl;
-
-	down4TBlock(boardColors, 66, startSpot, row, doneMoving);
-
-	printBoard(boardColors);
-	cout << endl;
-	//move4TBlock(boardColors, 66, startSpot, 1, row);
-	turn4TBlock(boardColors, 66, startSpot, row);
-
-
-	
-	//turnHorizontalIBlock(boardColors, 66, startSpot,  0);
+	//down1LBlock(boardColors, 66, startSpot, row, doneMoving);
 
 	//printBoard(boardColors);
 	//cout << endl;
 
-	//downHorizontalIBlock(boardColors, 66, startSpot, row, doneMoving);
-	//downVerticalIBlock(boardColors, 66, startSpot, row, doneMoving);
+	//move1LBlock(boardColors, 66, startSpot, 1, 2);
+	turn1LBlock(boardColors, 66, startSpot, row);
 
-	//turnVerticalIBlock(boardColors, 66, startSpot, 0);
+	printBoard(boardColors);
+	cout << endl;
+
+	//down2LBlock(boardColors, 66, startSpot, row, doneMoving);
+
+	//printBoard(boardColors);
+	//cout << endl;
+
+
+	//move2LBlock(boardColors, 66, startSpot, 1, row);
+	turn2LBlock(boardColors, 66, startSpot, row);
+
+	printBoard(boardColors);
+	cout << endl;
+
+	//down3LBlock(boardColors, 66, startSpot, row, doneMoving);
+
+	//printBoard(boardColors);
+	//cout << endl;
+
+	//move3LBlock(boardColors, 66, startSpot, 1, row);
+	turn3LBlock(boardColors, 66, startSpot, row);
+
+
+	printBoard(boardColors);
+	cout << endl;
+
+	down4LBlock(boardColors, 66, startSpot, row, doneMoving);
+
+	printBoard(boardColors);
+	cout << endl;
+
+
+	//move4LBlock(boardColors, 66, startSpot, 3, row);
+	turn4LBlock(boardColors, 66, startSpot, row);
+
 	
 
 	printBoard(boardColors);
@@ -124,6 +122,8 @@ int main()
 
 	return 0;
 }
+
+
 
 
 //function that will print the board to the screen
