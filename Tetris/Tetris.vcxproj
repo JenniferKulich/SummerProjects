@@ -141,12 +141,14 @@
   <ItemGroup>
     <ClCompile Include="Blocks.cpp" />
     <ClCompile Include="IBlock.cpp" />
+    <ClCompile Include="JBlock.cpp" />
     <ClCompile Include="LBlock.cpp" />
     <ClCompile Include="TBlock.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blocks.h" />
+    <ClInclude Include="JBlock.h" />
     <ClInclude Include="LBlock.h" />
     <ClInclude Include="IBlock.h" />
     <ClInclude Include="TBlock.h" />

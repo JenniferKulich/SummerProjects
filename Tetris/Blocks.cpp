@@ -36,21 +36,20 @@ void startJBlock(char boardColors[][10], int color, int &startSpot)
 	int i;
 
 	//get a random number where the left end should start
-	//make sure it is a number less than 7
+	//make sure it is a number less than 8
 	srand(time(NULL));
 
-	//get random number between 0 and 7
-	startSpot = rand() % 7;
+	//get random number between 1 and 8
+	startSpot = rand() % 8 + 1;
 
 	//call the color name function to get the name to put into the board
 	colorName = getColorName(color);
 
 
 	//go through and put the color name on the board
-	boardColors[0][startSpot] = colorName;
-	//loop through at add the other colors
-	for (i = startSpot; i < startSpot + 3; i++)
-		boardColors[1][i] = colorName;
+	for (i = 0; i < 3; i++ )
+		boardColors[i][startSpot] = colorName;
+	boardColors[2][startSpot - 1] = colorName;
 
 
 	return;
