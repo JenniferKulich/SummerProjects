@@ -143,6 +143,7 @@
     <ClCompile Include="IBlock.cpp" />
     <ClCompile Include="JBlock.cpp" />
     <ClCompile Include="LBlock.cpp" />
+    <ClCompile Include="SBlock.cpp" />
     <ClCompile Include="TBlock.cpp" />
     <ClCompile Include="Tetris.cpp" />
     <ClCompile Include="ZBlock.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="JBlock.h" />
     <ClInclude Include="LBlock.h" />
     <ClInclude Include="IBlock.h" />
+    <ClInclude Include="SBlock.h" />
     <ClInclude Include="TBlock.h" />
     <ClInclude Include="ZBlock.h" />
   </ItemGroup>
