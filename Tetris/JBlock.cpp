@@ -13,7 +13,9 @@ void move1JBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 3)
 	{
 		//check to see if can move to the right one
-		if (startSpot <= 8)
+		if (startSpot <= 8 && boardColors[row - 1][startSpot + 1] == 00 &&
+		boardColors[row][startSpot + 1] == 00 &&
+		boardColors[row + 1][startSpot + 1] == 00)
 		{
 			boardColors[row - 1][startSpot] = 00;
 			boardColors[row][startSpot] = 00;
@@ -29,7 +31,9 @@ void move1JBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check to see if can move to the left one
-		if (startSpot >= 2)
+		if (startSpot >= 2 && boardColors[row - 1][startSpot - 1] == 00 &&
+		boardColors[row][startSpot - 1] == 00 &&
+		boardColors[row + 1][startSpot - 2] == 00)
 		{
 			boardColors[row - 1][startSpot] = 00;
 			boardColors[row][startSpot] = 00;
@@ -55,7 +59,8 @@ void move2JBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 3)
 	{
 		//check to see if can move to the right one
-		if (startSpot <= 7)
+		if (startSpot <= 7 && boardColors[row][startSpot + 2] == 00 &&
+		boardColors[row - 1][startSpot] == 00)
 		{
 			boardColors[row - 1][startSpot - 1] = 00;
 			boardColors[row][startSpot - 1] = 00;
@@ -69,7 +74,8 @@ void move2JBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check to see if can move to the left one
-		if (startSpot >= 2)
+		if (startSpot >= 2 && boardColors[row - 1][startSpot - 2] == 00 &&
+		boardColors[row][startSpot - 2] == 00)
 		{
 			boardColors[row - 1][startSpot - 1] = 00;
 			boardColors[row][startSpot + 1] = 00;
@@ -93,7 +99,9 @@ void move3JBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 3)
 	{
 		//check to see if can move to the right one
-		if (startSpot <= 7)
+		if (startSpot <= 7 && boardColors[row - 1][startSpot + 2] == 00 &&
+		boardColors[row][startSpot + 1] == 00 && 
+		boardColors[row + 1][startSpot + 1] == 00)
 		{
 			boardColors[row - 1][startSpot] = 00;
 			boardColors[row][startSpot] = 00;
@@ -109,7 +117,9 @@ void move3JBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check to see if can move to the left one
-		if (startSpot >= 1)
+		if (startSpot >= 1 && boardColors[row - 1][startSpot - 1] == 00 &&
+		boardColors[row][startSpot - 1] == 00 &&
+		boardColors[row + 1][startSpot - 1] == 00)
 		{
 			boardColors[row - 1][startSpot + 1] = 00;
 			boardColors[row][startSpot] = 00;
@@ -135,7 +145,8 @@ void move4JBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 3)
 	{
 		//check to see if can move to the right one
-		if (startSpot <= 7)
+		if (startSpot <= 7 && boardColors[row][startSpot + 2] == 00 &&
+		boardColors[row + 1][startSpot + 2] == 00)
 		{
 			boardColors[row][startSpot - 1] = 00;
 			boardColors[row + 1][startSpot + 1] = 00;
@@ -149,7 +160,8 @@ void move4JBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check to see if can move to the left one
-		if (startSpot >= 2)
+		if (startSpot >= 2 && boardColors[row][startSpot - 2] == 00 &&
+		boardColors[row + 1][startSpot] == 00)
 		{
 			boardColors[row][startSpot + 1] = 00;
 			boardColors[row + 1][startSpot + 1] = 00;

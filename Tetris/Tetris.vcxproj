@@ -145,6 +145,7 @@
     <ClCompile Include="LBlock.cpp" />
     <ClCompile Include="TBlock.cpp" />
     <ClCompile Include="Tetris.cpp" />
+    <ClCompile Include="ZBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blocks.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="LBlock.h" />
     <ClInclude Include="IBlock.h" />
     <ClInclude Include="TBlock.h" />
+    <ClInclude Include="ZBlock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

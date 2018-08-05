@@ -173,18 +173,19 @@ void startZBlock(char boardColors[][10], int color, int &startSpot)
 	//make sure it is a number less than 8
 	srand(time(NULL));
 
-	//get random number between 0 and 8
-	startSpot = rand() % 8;
+	//get random number between 1 and 8
+	startSpot = rand() % 8 + 1;
 
 	//call the color name function to get the name to put into the board
 	colorName = getColorName(color);
 
 
 	//loop through at add the other colors
-	for (i = startSpot; i < startSpot + 2; i++)
-		boardColors[0][i] = colorName;
-	for (i = startSpot + 1; i < startSpot + 3; i++)
-		boardColors[1][i] = colorName;
+	boardColors[0][startSpot - 1] = colorName;
+	boardColors[0][startSpot] = colorName;
+	boardColors[1][startSpot] = colorName;
+	boardColors[1][startSpot + 1] = colorName;
+	
 
 	return;
 }

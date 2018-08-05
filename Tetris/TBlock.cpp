@@ -15,7 +15,8 @@ void move1TBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 3)
 	{
 		//check to see if can move to the right one
-		if (startSpot <= 7)
+		if (startSpot <= 7 && boardColors[row][startSpot + 1] == 00 
+			&& boardColors[row + 1][startSpot + 2] == 00)
 		{
 			boardColors[row][startSpot] = 00;
 			boardColors[row][startSpot + 1] = colorName;
@@ -30,7 +31,8 @@ void move1TBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check to see if can move to the left one
-		if (startSpot >= 2)
+		if (startSpot >= 2 && boardColors[row][startSpot - 1] == 00 &&
+			boardColors[row + 1][startSpot - 2] == 00)
 		{
 			boardColors[row][startSpot] = 00;
 			boardColors[row][startSpot - 1] = colorName;
@@ -54,7 +56,8 @@ void move2TBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 3)
 	{
 		//check to see if the move can be made to right
-		if (startSpot <= 8)
+		if (startSpot <= 8 && boardColors[row - 1][startSpot] == 00 &&
+			boardColors[row][startSpot + 1] == 00 && boardColors[row + 1][startSpot] == 00)
 		{
 			boardColors[row - 1][startSpot - 1] = 00;
 			boardColors[row - 1][startSpot] = colorName;
@@ -70,7 +73,8 @@ void move2TBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check to see if the move can be made to the left
-		if (startSpot >= 1)
+		if (startSpot >= 1 && boardColors[row - 1][startSpot - 2] == 00 &&
+			boardColors[row][startSpot - 2] == 00 && boardColors[row + 1][startSpot - 2] == 00)
 		{
 			boardColors[row - 1][startSpot - 1] = 00;
 			boardColors[row - 1][startSpot - 2] = colorName;
@@ -100,7 +104,8 @@ void move3TBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 3)
 	{
 		//check if it can move over to the right
-		if (startSpot <= 7)
+		if (startSpot <= 7 && boardColors[row - 1][startSpot + 2] == 00 &&
+			boardColors[row][startSpot + 1] == 00)
 		{
 			boardColors[row - 1][startSpot - 1] = 00;
 			boardColors[row - 1][startSpot + 2] = colorName;
@@ -114,7 +119,8 @@ void move3TBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check if it can move over to the left
-		if (startSpot >= 2)
+		if (startSpot >= 2 && boardColors[row - 1][startSpot - 2] == 00 &&
+			boardColors[row][startSpot - 1] == 00)
 		{
 			boardColors[row - 1][startSpot + 1] = 00;
 			boardColors[row - 1][startSpot - 2] = colorName;
@@ -139,7 +145,8 @@ void move4TBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 3)
 	{
 		//check to see if it can move one to the right
-		if (startSpot <= 7)
+		if (startSpot <= 7 && boardColors[row - 1][startSpot + 2] == 00 &&
+			boardColors[row][startSpot + 2] == 00 && boardColors[row + 1][startSpot + 2] == 00)
 		{
 			boardColors[row - 1][startSpot + 1] = 00;
 			boardColors[row - 1][startSpot + 2] = colorName;
@@ -155,7 +162,8 @@ void move4TBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check to see if it can move to the left
-		if (startSpot >= 1)
+		if (startSpot >= 1 && boardColors[row - 1][startSpot] == 00 &&
+			boardColors[row][startSpot - 1] == 00 && boardColors[row + 1][startSpot] == 00)
 		{
 			boardColors[row - 1][startSpot + 1] = 00;
 			boardColors[row - 1][startSpot] = colorName;
