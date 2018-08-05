@@ -8,6 +8,7 @@
 #include "JBlock.h"
 #include "ZBlock.h"
 #include "SBlock.h"
+#include "OBlock.h"
 
 
 using namespace std;
@@ -75,30 +76,23 @@ int main()
 	//row = 1;
 	//startZBlock(boardColors, color, startSpot); //need to start the row as 0
 	//row = 0;
-	startSBlock(boardColors, color, startSpot); //need to start the row as 0
-	row = 0;
+	//startSBlock(boardColors, color, startSpot); //need to start the row as 0
+	//row = 0;
+	startOBlock(boardColors, color, startSpot); //need to start the row as 0
 
 	printBoard(boardColors);
 	cout << endl;
 
-	//move1SBlock(boardColors, 66, startSpot, 1, row);
-	down1SBlock(boardColors, 66, startSpot, row, doneMoving);
+	moveOBlock(boardColors, 66, startSpot, 3, row);
 
 	printBoard(boardColors);
 	cout << endl;
 
-	turn1SBlock(boardColors, 66, startSpot, row);
+	downOBlock(boardColors, 66, startSpot, row, doneMoving);
 
-	printBoard(boardColors);
-	cout << endl;
+	
 
-	//move2SBlock(boardColors, 66, startSpot, 1, row);
-	//turn2SBlock(boardColors, 66, startSpot, row);
-
-	printBoard(boardColors);
-	cout << endl;
-
-	down2SBlock(boardColors, 66, startSpot, row, doneMoving);	
+	
 	
 
 	
