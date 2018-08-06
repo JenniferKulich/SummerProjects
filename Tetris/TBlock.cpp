@@ -366,8 +366,8 @@ void down3TBlock(char boardColors[][10], char colorName, int &startSpot, int &ro
 	bool canMove = true;
 
 	//check to see if can move down
-	if (boardColors[row - 1][startSpot - 1] != 00 || boardColors[row - 1][startSpot + 1] != 0 
-		|| boardColors[row + 1][startSpot] != 00 || row == 19)
+	if (row == 19 || boardColors[row][startSpot - 1] != 00 || boardColors[row][startSpot + 1] != 00 
+		|| boardColors[row + 1][startSpot] != 00)
 		canMove = false;
 
 
@@ -389,8 +389,8 @@ void down3TBlock(char boardColors[][10], char colorName, int &startSpot, int &ro
 	
 
 		//check to see if the there's anything below it
-		if (boardColors[row - 1][startSpot - 1] != 00 || boardColors[row - 1][startSpot + 1] != 0
-			|| boardColors[row + 1][startSpot] != 00 || row == 19)
+		if (row == 19 || boardColors[row][startSpot - 1] != 00 || boardColors[row][startSpot + 1] != 00
+			|| boardColors[row + 1][startSpot] != 00)
 			canMove = false;
 
 		//if there's something below it, will not move any more, and doneMoving will be true
