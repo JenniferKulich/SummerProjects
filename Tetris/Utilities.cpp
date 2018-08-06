@@ -14,43 +14,6 @@
 
 using namespace std;
 
-//function that will check if a row is completed and then will delete it and move everything down
-void checkIfCompleteRow(char boardColors[][10])
-{
-	int i, n, m, x, z;
-	int row = 0;
-	bool allFull = true;
-	char nameSpot;
-
-	for (i = 19; i > 0; i--)
-	{
-		for (n = 0; n < 10; n++)
-		{
-			if (boardColors[i][n] == 00)
-				allFull = false;
-		}
-		//if the entire row is full, record the row
-		if (allFull = true)
-		{
-			row = i;
-			//eliminate the whole row 
-			for (m = 0; m < 10; m++)
-				boardColors[row][m] = 00;
-			//move everything down
-			for (x = row - 1; x > 0; x--)
-			{
-				for (z = 0; z < 10; z++)
-				{
-					nameSpot = boardColors[x][z];
-					boardColors[x][z] = 00;
-					boardColors[x + 1][z] = nameSpot;
-				}
-			}
-		}
-	}
-
-
-}
 
 //function where everything gets put together
 void everythingTogether(char boardColors[][10])
@@ -58,6 +21,9 @@ void everythingTogether(char boardColors[][10])
 	char colorName;
 	int userMove;
 	int i;
+	bool isGameOver;
+	int newRandomBlock;
+	bool doesQuit;
 
 	//get the random color name for when the block starts
 	colorName = getColorName();
@@ -75,15 +41,38 @@ void everythingTogether(char boardColors[][10])
 	printBoard(boardColors);
 
 	checkIfCompleteRow(boardColors);
-		
+
 	printBoard(boardColors);
-	//get user input, 3 for right, 1 for left 2 for down, 6 for turn, 0 for quit
+		
+	
+
+	//get a random number between 1 and 7 to determine which block will start first
+	//get a random number for the color
+	srand(time(NULL));
+
+	//get random number between 1 and 7
+	newRandomBlock = rand() % 7 + 1;
+
+
 
 	//make a check to see if can start the block in the right spot, if cannot, move around until can
 
 	//check to see if something in the top line, if there is, then game over
+	/*isGameOver = gameOve(boardColors);
+	if (isGameOver == true)
+	{
+		cout << "Game is over!" << endl;
+		return;
+	}*/
+
 
 	//check to make sure that a row isn't full
+	//checkIfCompleteRow(boardColors);
+
+	//allMoveOBlock(colorName, boardColors, doesQuit);
+
+	/*if (doesQuit == true)
+		return;*/
 	
 
 	return;
@@ -92,27 +81,124 @@ void everythingTogether(char boardColors[][10])
 
 
 //function that will do all of the moves of the O block until none can be made
-void allMoveOBlock(char colorName, char boardColors[][10])
+void allMoveOBlock(char colorName, char boardColors[][10], bool &doesQuit)
 {
 	int row = 0;
 	int startSpot = 0;
 	bool doneMoving = false;
+	int userInput;
+	bool isGameOver;
+	bool wasFull = false;
 
 	startOBlock(boardColors, colorName, startSpot); //need to start the row as 0
 
 	printBoard(boardColors);
 	cout << endl;
+	
+	while (doneMoving != true)
+	{
+		//get user input, 3 for right, 1 for left 2 for down, 6 for turn, 0 for quit
+		cin >> userInput;
 
-	moveOBlock(boardColors, colorName, startSpot, 3, row);
-
-	printBoard(boardColors);
-	cout << endl;
-
-	downOBlock(boardColors, colorName, startSpot, row, doneMoving);
+		if (userInput == 3 || userInput == 1)
+		{
+			moveOBlock(boardColors, colorName, startSpot, userInput, row);
+			printBoard(boardColors);
+			cout << endl;
+		}
+		else if (userInput == 2)
+		{
+			downOBlock(boardColors, colorName, startSpot, row, doneMoving);
+			printBoard(boardColors);
+			cout << endl;
+		}
+		else if (userInput == 0)
+			doesQuit = true;
+		else
+		{
+			downOBlock(boardColors, colorName, startSpot, row, doneMoving);
+			printBoard(boardColors);
+			cout << endl;
+		}
+		//check to see if done moving is true
+		//if it is, break out of the loop to start a new one
+		if (doneMoving == true)
+		{
+			//check to make sure that a row isn't full
+			checkIfCompleteRow(boardColors);
+			while(wasFull == true)
+				checkIfCompleteRow(boardColors);
+			//check to see if something in the top line, if there is, then game over
+			isGameOver = gameOve(boardColors);
+			if (isGameOver == true)
+			{
+				cout << "Game is over!" << endl;
+				doesQuit = true;
+				return;
+			}
+		}
+	}
+	
 
 	return;
 }
 
+
+//function that will check if a row is completed and then will delete it and move everything down
+void checkIfCompleteRow(char boardColors[][10])
+{
+	int i, n, m, x, z;
+	int row = 0;
+	bool allFull = true;
+	char nameSpot;
+	
+
+	for (i = 19; i > 0; --i)
+	{
+		for (n = 0; n < 10; n++)
+		{
+			if (boardColors[i][n] == 00)
+				allFull = false;
+		}
+		//if the entire row is full, record the row
+		if (allFull == true)
+		{
+			row = i;
+			//eliminate the whole row 
+			for (m = 0; m < 10; m++)
+				boardColors[row][m] = 00;
+			//move everything down
+			for (x = row - 1; x > 0; x--)
+			{
+				for (z = 0; z < 10; z++)
+				{
+					nameSpot = boardColors[x][z];
+					boardColors[x][z] = 00;
+					boardColors[x + 1][z] = nameSpot;
+				}
+			}
+			i++;
+		}
+	}
+		
+
+	return;
+}
+
+//function that will check if there is something in the top row. If there is, the game is over
+bool gameOve(char boardColors[][10])
+{
+	int i;
+
+	//loop through to check the whole first row
+	for (i = 0; i < 10; i++)
+	{
+		if (boardColors[0][i] != 00)
+			return true;
+	}
+
+	return false;
+}
 
 //function that will return the character name of what color will be used
 char getColorName()
@@ -124,7 +210,7 @@ char getColorName()
 	srand(time(NULL));
 
 	//get random number between 1 and 8
-	color = rand() % 7 + 1;
+	color = rand() % 8 + 1;
 	/*
 	The different color codes are
 
