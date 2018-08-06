@@ -72,7 +72,7 @@ void move2ZBlock(char boardColors[][10], char colorName, int &startSpot, int use
 	if (userMove == 1)
 	{
 		//check to see if can move to the left one
-		if (startSpot >= 2 && boardColors[row - 1][startSpot] == 00 &&
+		if (startSpot >= 1 && boardColors[row - 1][startSpot] == 00 &&
 		boardColors[row][startSpot - 1] == 00 &&
 		boardColors[row + 1][startSpot - 1] == 00)
 		{
@@ -106,7 +106,6 @@ void turn1ZBlock(char boardColors[][10], char colorName, int &startSpot, int &ro
 		boardColors[row + 1][startSpot + 1] = 00;
 		boardColors[row - 1][startSpot + 1] = colorName;
 		boardColors[row][startSpot + 1] = colorName;
-
 	}
 
 	return;
@@ -188,8 +187,8 @@ void down2ZBlock(char boardColors[][10], char colorName, int &startSpot, int &ro
 	bool canMove = true;
 
 	//check to see if can move down
-	if (row + 1 == 19 || boardColors[row + 1][startSpot - 1] != 00
-		|| boardColors[row + 2][startSpot] != 00 || boardColors[row + 2][startSpot + 1] != 00)
+	if (row + 1 == 19 || boardColors[row + 1][startSpot + 1] != 00
+		|| boardColors[row + 2][startSpot] != 00 || boardColors[row + 1][startSpot + 1] != 00)
 		canMove = false;
 
 
@@ -201,17 +200,16 @@ void down2ZBlock(char boardColors[][10], char colorName, int &startSpot, int &ro
 	if (canMove == true)
 	{
 		//move down
-		boardColors[row][startSpot - 1] = 00;
+		boardColors[row - 1][startSpot + 1] = 00;
 		boardColors[row][startSpot] = 00;
-		boardColors[row + 1][startSpot + 1] = 00;
-		boardColors[row + 1][startSpot - 1] = colorName;
+		boardColors[row + 1][startSpot + 1] = colorName;
 		boardColors[row + 2][startSpot] = colorName;
-		boardColors[row + 2][startSpot + 1] = colorName;
+		boardColors[row + 1][startSpot + 1] = colorName;
 		row = row + 1;
 
 		//check to see if the there's anything below it
-		if (row + 1 == 19 || boardColors[row + 1][startSpot - 1] != 00
-			|| boardColors[row + 2][startSpot] != 00 || boardColors[row + 2][startSpot + 1] != 00)
+		if (row + 1 == 19 || boardColors[row + 1][startSpot + 1] != 00
+			|| boardColors[row + 2][startSpot] != 00 || boardColors[row + 1][startSpot + 1] != 00)
 			canMove = false;
 
 		//if there's something below it, will not move any more, and doneMoving will be true

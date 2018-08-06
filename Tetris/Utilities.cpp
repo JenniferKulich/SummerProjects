@@ -62,7 +62,7 @@ void everythingTogether(char boardColors[][10])
 	//check to make sure that a row isn't full
 	//checkIfCompleteRow(boardColors);
 
-	allMoveJBlock(colorName, boardColors, doesQuit);
+	allMoveZBlock(colorName, boardColors, doesQuit);
 
 	if (doesQuit == true)
 		return;
@@ -721,7 +721,119 @@ void allMoveJBlock(char colorName, char boardColors[][10], bool &doesQuit)
 //function that will do all of the moves of the Z block until none can be made
 void allMoveZBlock(char colorName, char boardColors[][10], bool &doesQuit)
 {
+	int row = 0;
+	int startSpot = 0;
+	bool doneMoving = false;
+	int userInput;
+	bool isGameOver;
+	bool wasFull = false;
+	int typeTurn = 1; //this means it is on the normal, start one
 
+	startZBlock(boardColors, colorName, startSpot); //need to start the row as 0
+	
+
+	printBoard(boardColors);
+	cout << endl;
+
+	while (doneMoving != true)
+	{
+		//get user input, 3 for right, 1 for left 2 for down, 6 for turn, 0 for quit
+		cin >> userInput;
+
+		//this will move the block right or left
+		if (userInput == 3 || userInput == 1)
+		{
+			if (typeTurn == 1)
+			{
+				move1ZBlock(boardColors, colorName, startSpot, userInput, row);
+				down1ZBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				move2ZBlock(boardColors, colorName, startSpot, userInput, row);
+				down2ZBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+
+		//this will move the block down
+		else if (userInput == 2)
+		{
+			if (typeTurn == 1)
+			{
+				down1ZBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				down2ZBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+
+		//this will turn the block
+		else if (userInput == 6)
+		{
+			//call the function to turn the block and update the turn type
+			if (typeTurn == 1)
+			{
+				turn1ZBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 2;
+			}
+			else if (typeTurn == 2)
+			{
+				turn2ZBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 1;
+			}
+		}
+
+		//this will quit
+		else if (userInput == 0)
+			doesQuit = true;
+
+		//otherwise, just move the block down
+		else
+		{
+			if (typeTurn == 1)
+			{
+				down1ZBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				down2ZBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+		//check to see if done moving is true
+		//if it is, break out of the loop to start a new one
+		if (doneMoving == true)
+		{
+			//check to make sure that a row isn't full
+			checkIfCompleteRow(boardColors);
+			while (wasFull == true)
+				checkIfCompleteRow(boardColors);
+			//check to see if something in the top line, if there is, then game over
+			isGameOver = gameOve(boardColors);
+			if (isGameOver == true)
+			{
+				cout << "Game is over!" << endl;
+				doesQuit = true;
+				return;
+			}
+		}
+	}
 
 	return;
 }
