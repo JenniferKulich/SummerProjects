@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
+#include "Utilities.h"
 #include "Blocks.h"
 #include "IBlock.h"
 #include "TBlock.h"
@@ -13,13 +14,11 @@
 
 using namespace std;
 
-void printBoard(char board[][10]);
 
 
 int main()
 {
 
-	char board[20][10];
 	char boardColors[20][10];
 	int i, n;
 	int startSpot = 0;
@@ -78,25 +77,22 @@ int main()
 	//row = 0;
 	//startSBlock(boardColors, color, startSpot); //need to start the row as 0
 	//row = 0;
-	startOBlock(boardColors, color, startSpot); //need to start the row as 0
+	//startOBlock(boardColors, color, startSpot); //need to start the row as 0
 
-	printBoard(boardColors);
-	cout << endl;
+	//printBoard(boardColors);
+	//cout << endl;
 
-	moveOBlock(boardColors, 66, startSpot, 3, row);
+	//moveOBlock(boardColors, 66, startSpot, 3, row);
 
-	printBoard(boardColors);
-	cout << endl;
+	//printBoard(boardColors);
+	//cout << endl;
 
-	downOBlock(boardColors, 66, startSpot, row, doneMoving);
+	//downOBlock(boardColors, 66, startSpot, row, doneMoving);
 
-	
+	//printBoard(boardColors);
 
-	
-	
 
-	
-	printBoard(boardColors);
+	everythingTogether(boardColors);
 
 
 	return 0;
@@ -107,43 +103,5 @@ int main()
 
 
 
-//function that will print the board to the screen
-void printBoard(char board[][10])
-{
-	int i, n;
-	char vl = (char)186; //vertical double line
-	char hl = (char)205; //horizontal double line
-	char ulc = (char)201; //upper left corner
-	char urc = (char)187; //upper right corner
-	char llc = (char)200; //lower left corner
-	char lrc = (char)188; //lower right corner
 
-	//set the border and everything inside to white- everything inside should not be white though
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-
-	//top line
-	cout << ulc << hl << hl << hl << hl << hl << hl << hl << hl << hl << hl <<
-		hl << hl << hl << hl << hl << hl << hl << hl << hl << urc << endl;
-
-	//loop through and print the board
-	for (i = 0; i < 20; i++)
-	{
-		cout << vl;
-		for (n = 0; n < 10; n++)
-		{
-			if (n == 9)
-				cout << board[i][n];
-			else
-				cout << board[i][n] << " ";
-		}
-		
-		cout << vl << endl;
-	}
-
-	//bottom row
-	cout << llc << hl << hl << hl << hl << hl << hl << hl << hl << hl << hl <<
-		hl << hl << hl << hl << hl << hl << hl << hl << hl << lrc << endl;
-
-	return;
-}
 
