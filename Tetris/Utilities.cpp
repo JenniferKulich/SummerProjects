@@ -23,26 +23,25 @@ void everythingTogether(char boardColors[][10])
 	int i;
 	bool isGameOver;
 	int newRandomBlock;
-	bool doesQuit;
+	bool doesQuit = false;
 
-	//get the random color name for when the block starts
-	colorName = getColorName();
+	
 
 
 	//get random number so a random start block will be picked
 	//allMoveOBlock(colorName, boardColors);
 
-	for (i = 0; i < 10; i++)
+	/*for (i = 0; i < 10; i++)
 	{
 		boardColors[19][i] = 67;
 		boardColors[18][i] = 68;
 	}
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);
 
 	checkIfCompleteRow(boardColors);
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);*/
 		
 	
 
@@ -50,22 +49,39 @@ void everythingTogether(char boardColors[][10])
 	//get a random number for the color
 	srand(time(NULL));
 
-	//get random number between 1 and 7
-	newRandomBlock = rand() % 7 + 1;
-
-
 
 	//make a check to see if can start the block in the right spot, if cannot, move around until can
 
-	
+	while (doesQuit != true)
+	{
+		//get the random color name for when the block starts
+		colorName = getColorName();
+		//get random number between 1 and 7
+		newRandomBlock = rand() % 7 + 1;
+
+		if (newRandomBlock == 1)
+			allMoveIBlock(colorName, boardColors, doesQuit);
+		if(newRandomBlock == 2)
+			allMoveTBlock(colorName, boardColors, doesQuit);
+		if(newRandomBlock == 3)
+			allMoveLBlock(colorName, boardColors, doesQuit);
+		if(newRandomBlock == 4)
+			allMoveJBlock(colorName, boardColors, doesQuit);
+		if(newRandomBlock == 5)
+			allMoveZBlock(colorName, boardColors, doesQuit);
+		if(newRandomBlock == 6)
+			allMoveSBlock(colorName, boardColors, doesQuit);
+		if(newRandomBlock == 7)
+			allMoveOBlock(colorName, boardColors, doesQuit);
+	}
 
 	//check to make sure that a row isn't full
 	//checkIfCompleteRow(boardColors);
 
-	allMoveSBlock(colorName, boardColors, doesQuit);
+	/*allMoveSBlock(colorName, boardColors, doesQuit);
 
 	if (doesQuit == true)
-		return;
+		return;*/
 	
 
 	return;
@@ -85,7 +101,7 @@ void allMoveIBlock(char colorName, char boardColors[][10], bool &doesQuit)
 
 	startIBlock(boardColors, colorName, startSpot); //need to start the row as 0
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);
 	cout << endl;
 
 	while (doneMoving != true)
@@ -100,14 +116,14 @@ void allMoveIBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			{
 				moveHorizontalIBlock(boardColors, colorName, startSpot, userInput, row);
 				downHorizontalIBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				moveVerticalIBlock(boardColors, colorName, startSpot, userInput, row);
 				downVerticalIBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -118,13 +134,13 @@ void allMoveIBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				downHorizontalIBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				downVerticalIBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -136,14 +152,14 @@ void allMoveIBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				turnHorizontalIBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 2;
 			}
 			else if (typeTurn == 2)
 			{
 				turnVerticalIBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 1;
 			}
@@ -160,13 +176,13 @@ void allMoveIBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				downHorizontalIBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				downVerticalIBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -207,7 +223,7 @@ void allMoveTBlock(char colorName, char boardColors[][10], bool &doesQuit)
 
 	startTBlock(boardColors, colorName, startSpot); //need to start the row as 0
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);
 	cout << endl;
 
 	while (doneMoving != true)
@@ -222,28 +238,28 @@ void allMoveTBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			{
 				move1TBlock(boardColors, colorName, startSpot, userInput, row);
 				down1TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if(typeTurn == 2)
 			{
 				move2TBlock(boardColors, colorName, startSpot, userInput, row);
 				down2TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				move3TBlock(boardColors, colorName, startSpot, userInput, row);
 				down3TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				move4TBlock(boardColors, colorName, startSpot, userInput, row);
 				down4TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -254,25 +270,25 @@ void allMoveTBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				down3TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				down4TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -284,28 +300,28 @@ void allMoveTBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				turn1TBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 2;
 			}
 			else if (typeTurn == 2)
 			{
 				turn2TBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 3;
 			}
 			else if (typeTurn == 3)
 			{
 				turn3TBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 4;
 			}
 			else if (typeTurn == 4)
 			{
 				turn4TBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 1;
 			}
@@ -322,25 +338,25 @@ void allMoveTBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				down3TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				down4TBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -382,7 +398,7 @@ void allMoveLBlock(char colorName, char boardColors[][10], bool &doesQuit)
 	startLBlock(boardColors, colorName, startSpot); //need to start the row as 2
 	row = 2;
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);
 	cout << endl;
 
 	while (doneMoving != true)
@@ -397,28 +413,28 @@ void allMoveLBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			{
 				move1LBlock(boardColors, colorName, startSpot, userInput, row);
 				down1LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				move2LBlock(boardColors, colorName, startSpot, userInput, row);
 				down2LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				move3LBlock(boardColors, colorName, startSpot, userInput, row);
 				down3LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				move4LBlock(boardColors, colorName, startSpot, userInput, row);
 				down4LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -429,25 +445,25 @@ void allMoveLBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				down3LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				down4LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -459,28 +475,28 @@ void allMoveLBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				turn1LBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 2;
 			}
 			else if (typeTurn == 2)
 			{
 				turn2LBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 3;
 			}
 			else if (typeTurn == 3)
 			{
 				turn3LBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 4;
 			}
 			else if (typeTurn == 4)
 			{
 				turn4LBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 1;
 			}
@@ -497,25 +513,25 @@ void allMoveLBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				down3LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				down4LBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -557,7 +573,7 @@ void allMoveJBlock(char colorName, char boardColors[][10], bool &doesQuit)
 	startJBlock(boardColors, colorName, startSpot); //need to start the row as 1
 	row = 1;
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);
 	cout << endl;
 
 	while (doneMoving != true)
@@ -572,28 +588,28 @@ void allMoveJBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			{
 				move1JBlock(boardColors, colorName, startSpot, userInput, row);
 				down1JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				move2JBlock(boardColors, colorName, startSpot, userInput, row);
 				down2JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				move3JBlock(boardColors, colorName, startSpot, userInput, row);
 				down3JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				move4JBlock(boardColors, colorName, startSpot, userInput, row);
 				down4JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -604,25 +620,25 @@ void allMoveJBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				down3JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				down4JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -634,28 +650,28 @@ void allMoveJBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				turn1JBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 2;
 			}
 			else if (typeTurn == 2)
 			{
 				turn2JBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 3;
 			}
 			else if (typeTurn == 3)
 			{
 				turn3JBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 4;
 			}
 			else if (typeTurn == 4)
 			{
 				turn4JBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 1;
 			}
@@ -672,25 +688,25 @@ void allMoveJBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 3)
 			{
 				down3JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else
 			{
 				down4JBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -732,7 +748,7 @@ void allMoveZBlock(char colorName, char boardColors[][10], bool &doesQuit)
 	startZBlock(boardColors, colorName, startSpot); //need to start the row as 0
 	
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);
 	cout << endl;
 
 	while (doneMoving != true)
@@ -747,14 +763,14 @@ void allMoveZBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			{
 				move1ZBlock(boardColors, colorName, startSpot, userInput, row);
 				down1ZBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				move2ZBlock(boardColors, colorName, startSpot, userInput, row);
 				down2ZBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -765,13 +781,13 @@ void allMoveZBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1ZBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2ZBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -783,14 +799,14 @@ void allMoveZBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				turn1ZBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 2;
 			}
 			else if (typeTurn == 2)
 			{
 				turn2ZBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 1;
 			}
@@ -806,13 +822,13 @@ void allMoveZBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1ZBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2ZBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -854,7 +870,7 @@ void allMoveSBlock(char colorName, char boardColors[][10], bool &doesQuit)
 	startSBlock(boardColors, colorName, startSpot); //need to start the row as 0
 	
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);
 	cout << endl;
 
 	while (doneMoving != true)
@@ -869,14 +885,14 @@ void allMoveSBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			{
 				move1SBlock(boardColors, colorName, startSpot, userInput, row);
 				down1SBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				move2SBlock(boardColors, colorName, startSpot, userInput, row);
 				down2SBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -887,13 +903,13 @@ void allMoveSBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1SBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2SBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -905,14 +921,14 @@ void allMoveSBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				turn1SBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 2;
 			}
 			else if (typeTurn == 2)
 			{
 				turn2SBlock(boardColors, colorName, startSpot, row);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 				typeTurn = 1;
 			}
@@ -928,13 +944,13 @@ void allMoveSBlock(char colorName, char boardColors[][10], bool &doesQuit)
 			if (typeTurn == 1)
 			{
 				down1SBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 			else if (typeTurn == 2)
 			{
 				down2SBlock(boardColors, colorName, startSpot, row, doneMoving);
-				printBoard(boardColors);
+				printBoard(boardColors,  colorName);
 				cout << endl;
 			}
 		}
@@ -972,7 +988,7 @@ void allMoveOBlock(char colorName, char boardColors[][10], bool &doesQuit)
 
 	startOBlock(boardColors, colorName, startSpot); //need to start the row as 0
 
-	printBoard(boardColors);
+	printBoard(boardColors,  colorName);
 	cout << endl;
 	
 	while (doneMoving != true)
@@ -983,16 +999,16 @@ void allMoveOBlock(char colorName, char boardColors[][10], bool &doesQuit)
 		if (userInput == 3 || userInput == 1)
 		{
 			moveOBlock(boardColors, colorName, startSpot, userInput, row);
-			printBoard(boardColors);
+			printBoard(boardColors,  colorName);
 			cout << endl;
 			downOBlock(boardColors, colorName, startSpot, row, doneMoving);
-			printBoard(boardColors);
+			printBoard(boardColors,  colorName);
 			cout << endl;
 		}
 		else if (userInput == 2)
 		{
 			downOBlock(boardColors, colorName, startSpot, row, doneMoving);
-			printBoard(boardColors);
+			printBoard(boardColors,  colorName);
 			cout << endl;
 		}
 		else if (userInput == 0)
@@ -1000,7 +1016,7 @@ void allMoveOBlock(char colorName, char boardColors[][10], bool &doesQuit)
 		else
 		{
 			downOBlock(boardColors, colorName, startSpot, row, doneMoving);
-			printBoard(boardColors);
+			printBoard(boardColors,  colorName);
 			cout << endl;
 		}
 		//check to see if done moving is true
@@ -1140,9 +1156,11 @@ char getColorName()
 
 
 //function that will print the board to the screen
-void printBoard(char board[][10])
+void printBoard(char board[][10], char colorName)
 {
 	int i, n;
+	char theColor;
+	char block = (char)219; //block
 	char vl = (char)186; //vertical double line
 	char hl = (char)205; //horizontal double line
 	char ulc = (char)201; //upper left corner
@@ -1150,7 +1168,10 @@ void printBoard(char board[][10])
 	char llc = (char)200; //lower left corner
 	char lrc = (char)188; //lower right corner
 
-						  //set the border and everything inside to white- everything inside should not be white though
+	//clear the screen before printing
+	system("CLS");
+
+	//set the border and everything inside to white- everything inside should not be white though
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
 	//top line
@@ -1160,15 +1181,45 @@ void printBoard(char board[][10])
 	//loop through and print the board
 	for (i = 0; i < 20; i++)
 	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); //white color for border
 		cout << vl;
 		for (n = 0; n < 10; n++)
 		{
-			if (n == 9)
-				cout << board[i][n];
+			theColor = board[i][n];
+			if(theColor == 66) //B for blue
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1); 
+			if(theColor == 71) //G for green
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+			if(theColor == 82) //R for red
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+			if(theColor == 77)//M for magenta
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
+			if(theColor == 87) //W for brown
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+			if(theColor == 76) //L for light blue
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+			if(theColor == 89) //Y for yellow
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+		
+			if (theColor != 00)
+			{
+				
+				if (n == 9)
+					cout << block;
+				else
+					cout << block << block;
+			}
 			else
-				cout << board[i][n] << " ";
-		}
+			{
 
+				if (n == 9)
+					cout << board[i][n];
+				else
+					cout << board[i][n] << " ";
+			}
+
+		}
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); //white color for border
 		cout << vl << endl;
 	}
 

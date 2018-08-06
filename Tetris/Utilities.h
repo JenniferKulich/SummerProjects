@@ -4,7 +4,7 @@
 
 char getColorName();
 void everythingTogether(char boardColors[][10]);
-void printBoard(char board[][10]);
+void printBoard(char board[][10], char colorName);
 void checkIfCompleteRow(char boardColors[][10]);
 bool gameOve(char boardColors[][10]);
 void allMoveIBlock(char colorName, char boardColors[][10], bool &doesQuit);
