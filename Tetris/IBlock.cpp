@@ -56,13 +56,12 @@ void moveVerticalIBlock(char boardColors[][10], char colorName, int &startSpot, 
 			boardColors[row + 3][startSpot + 1] == 00)
 		{
 			//loop through to move all over
-			for (i = row; i < row + 3; i++)
+			for (i = row; i < row + 4; i++)
 			{
 				boardColors[i][startSpot] = 00;
 				boardColors[i][startSpot + 1] = colorName;
-				startSpot = startSpot + 1;
-
 			}
+			startSpot = startSpot + 1;
 		}
 	}
 
@@ -73,16 +72,15 @@ void moveVerticalIBlock(char boardColors[][10], char colorName, int &startSpot, 
 		if (startSpot > 0 && boardColors[row][startSpot - 1] == 00 &&
 			boardColors[row + 1][startSpot - 1] == 00 &&
 			boardColors[row + 2][startSpot - 1] == 00 &&
-			boardColors[row + 3][startSpot - 1])
+			boardColors[row + 3][startSpot - 1] == 00)
 		{
 			//loop through to move all over
-			for (i = row; i < row + 3; i++)
+			for (i = row; i < row + 4; i++)
 			{
 				boardColors[i][startSpot] = 00;
 				boardColors[i][startSpot - 1] = colorName;
-				startSpot = startSpot - 1;
-
 			}
+			startSpot = startSpot - 1;
 		}
 	}
 
@@ -187,7 +185,7 @@ void downHorizontalIBlock(char boardColors[][10], char colorName, int &startSpot
 		//check to see if the there's anything below it
 		for (i = startSpot; i < startSpot + 4; i++)
 		{
-			if (boardColors[row][i] != 00)
+			if (boardColors[row + 1][i] != 00)
 				canMove = false;
 		}
 		if (row == 19)
