@@ -62,7 +62,7 @@ void everythingTogether(char boardColors[][10])
 	//check to make sure that a row isn't full
 	//checkIfCompleteRow(boardColors);
 
-	allMoveTBlock(colorName, boardColors, doesQuit);
+	allMoveJBlock(colorName, boardColors, doesQuit);
 
 	if (doesQuit == true)
 		return;
@@ -371,7 +371,172 @@ void allMoveTBlock(char colorName, char boardColors[][10], bool &doesQuit)
 //function that will do all of the moves of the L block until none can be made
 void allMoveLBlock(char colorName, char boardColors[][10], bool &doesQuit)
 {
+	int row = 0;
+	int startSpot = 0;
+	bool doneMoving = false;
+	int userInput;
+	bool isGameOver;
+	bool wasFull = false;
+	int typeTurn = 1; //this means it is on the normal, start one
 
+	startLBlock(boardColors, colorName, startSpot); //need to start the row as 2
+	row = 2;
+
+	printBoard(boardColors);
+	cout << endl;
+
+	while (doneMoving != true)
+	{
+		//get user input, 3 for right, 1 for left 2 for down, 6 for turn, 0 for quit
+		cin >> userInput;
+
+		//this will move the block right or left
+		if (userInput == 3 || userInput == 1)
+		{
+			if (typeTurn == 1)
+			{
+				move1LBlock(boardColors, colorName, startSpot, userInput, row);
+				down1LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				move2LBlock(boardColors, colorName, startSpot, userInput, row);
+				down2LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 3)
+			{
+				move3LBlock(boardColors, colorName, startSpot, userInput, row);
+				down3LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else
+			{
+				move4LBlock(boardColors, colorName, startSpot, userInput, row);
+				down4LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+
+		//this will move the block down
+		else if (userInput == 2)
+		{
+			if (typeTurn == 1)
+			{
+				down1LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				down2LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 3)
+			{
+				down3LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else
+			{
+				down4LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+
+		//this will turn the block
+		else if (userInput == 6)
+		{
+			//call the function to turn the block and update the turn type
+			if (typeTurn == 1)
+			{
+				turn1LBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 2;
+			}
+			else if (typeTurn == 2)
+			{
+				turn2LBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 3;
+			}
+			else if (typeTurn == 3)
+			{
+				turn3LBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 4;
+			}
+			else if (typeTurn == 4)
+			{
+				turn4LBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 1;
+			}
+
+		}
+
+		//this will quit
+		else if (userInput == 0)
+			doesQuit = true;
+
+		//otherwise, just move the block down
+		else
+		{
+			if (typeTurn == 1)
+			{
+				down1LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				down2LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 3)
+			{
+				down3LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else
+			{
+				down4LBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+		//check to see if done moving is true
+		//if it is, break out of the loop to start a new one
+		if (doneMoving == true)
+		{
+			//check to make sure that a row isn't full
+			checkIfCompleteRow(boardColors);
+			while (wasFull == true)
+				checkIfCompleteRow(boardColors);
+			//check to see if something in the top line, if there is, then game over
+			isGameOver = gameOve(boardColors);
+			if (isGameOver == true)
+			{
+				cout << "Game is over!" << endl;
+				doesQuit = true;
+				return;
+			}
+		}
+	}
 
 	return;
 }
@@ -381,7 +546,172 @@ void allMoveLBlock(char colorName, char boardColors[][10], bool &doesQuit)
 //function that will do all of the moves of the J block until none can be made
 void allMoveJBlock(char colorName, char boardColors[][10], bool &doesQuit)
 {
+	int row = 0;
+	int startSpot = 0;
+	bool doneMoving = false;
+	int userInput;
+	bool isGameOver;
+	bool wasFull = false;
+	int typeTurn = 1; //this means it is on the normal, start one
 
+	startJBlock(boardColors, colorName, startSpot); //need to start the row as 1
+	row = 1;
+
+	printBoard(boardColors);
+	cout << endl;
+
+	while (doneMoving != true)
+	{
+		//get user input, 3 for right, 1 for left 2 for down, 6 for turn, 0 for quit
+		cin >> userInput;
+
+		//this will move the block right or left
+		if (userInput == 3 || userInput == 1)
+		{
+			if (typeTurn == 1)
+			{
+				move1JBlock(boardColors, colorName, startSpot, userInput, row);
+				down1JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				move2JBlock(boardColors, colorName, startSpot, userInput, row);
+				down2JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 3)
+			{
+				move3JBlock(boardColors, colorName, startSpot, userInput, row);
+				down3JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else
+			{
+				move4JBlock(boardColors, colorName, startSpot, userInput, row);
+				down4JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+
+		//this will move the block down
+		else if (userInput == 2)
+		{
+			if (typeTurn == 1)
+			{
+				down1JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				down2JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 3)
+			{
+				down3JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else
+			{
+				down4JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+
+		//this will turn the block
+		else if (userInput == 6)
+		{
+			//call the function to turn the block and update the turn type
+			if (typeTurn == 1)
+			{
+				turn1JBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 2;
+			}
+			else if (typeTurn == 2)
+			{
+				turn2JBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 3;
+			}
+			else if (typeTurn == 3)
+			{
+				turn3JBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 4;
+			}
+			else if (typeTurn == 4)
+			{
+				turn4JBlock(boardColors, colorName, startSpot, row);
+				printBoard(boardColors);
+				cout << endl;
+				typeTurn = 1;
+			}
+
+		}
+
+		//this will quit
+		else if (userInput == 0)
+			doesQuit = true;
+
+		//otherwise, just move the block down
+		else
+		{
+			if (typeTurn == 1)
+			{
+				down1JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 2)
+			{
+				down2JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else if (typeTurn == 3)
+			{
+				down3JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+			else
+			{
+				down4JBlock(boardColors, colorName, startSpot, row, doneMoving);
+				printBoard(boardColors);
+				cout << endl;
+			}
+		}
+		//check to see if done moving is true
+		//if it is, break out of the loop to start a new one
+		if (doneMoving == true)
+		{
+			//check to make sure that a row isn't full
+			checkIfCompleteRow(boardColors);
+			while (wasFull == true)
+				checkIfCompleteRow(boardColors);
+			//check to see if something in the top line, if there is, then game over
+			isGameOver = gameOve(boardColors);
+			if (isGameOver == true)
+			{
+				cout << "Game is over!" << endl;
+				doesQuit = true;
+				return;
+			}
+		}
+	}
 
 	return;
 }
